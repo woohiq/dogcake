@@ -9,7 +9,7 @@ from sqlalchemy.orm import sessionmaker, Session
 from datetime import datetime
 import google.generativeai as genai
 import os
-# from dotenv import load_dotenv - for local
+# from dotenv import load_dotenv # local
 # load_dotenv()
 app = FastAPI()
 print("현재 DATABASE_URL:", os.getenv("DATABASE_URL"))
