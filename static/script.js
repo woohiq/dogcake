@@ -79,36 +79,68 @@ function updateEmotion(emotion) {
 
 window.onload = () => updateEmotion('happy');
 
-const feedbackInput = document.getElementById('feedback-input');
-const submitButton = document.getElementById('submit-feedback');
+document.addEventListener("DOMContentLoaded", () => {
+    const chatLog = document.getElementById('chat-log');
+    const userInput = document.getElementById('user-input');
+    const sendButton = document.getElementById('send-button');
+    const emotionImage = document.getElementById('emotion-image');
+    const backendUrl = '/chat';
 
-submitButton.addEventListener('click', async () => {
-    const feedback = feedbackInput.value.trim();
-    if (!feedback) {
-        alert("피드백을 입력해주세요!");
-        return;
-    }
+    sendButton.addEventListener('click', sendMessage);
+    userInput.addEventListener('keypress', function (event) {
+        if (event.key === 'Enter') {
+            sendMessage();
+        }
+    });
 
-    try {
-        const response = await fetch('/api/feedback', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ feedback: feedback })
-        });
+    const feedbackInput = document.getElementById('feedback-input');
+    const submitButton = document.getElementById('submit-feedback');
+    const feedbackToggle = document.getElementById("feedback-toggle");
+    const feedbackBox = document.getElementById("feedback-container");
 
-        if (!response.ok) {
-            const errorData = await response.json();
-            alert(`오류 발생: ${errorData.detail || "알 수 없는 오류"}`);
+    submitButton.addEventListener('click', async () => {
+        const feedback = feedbackInput.value.trim();
+        const spinner = document.getElementById("feedback-spinner");
+    
+        if (!feedback) {
+            alert("피드백을 입력해주세요!");
             return;
         }
+    
+        // 전송 중 처리
+        submitButton.disabled = true;
+        spinner.style.display = 'inline-block';
+    
+        try {
+            const response = await fetch('/api/feedback', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ feedback: feedback })
+            });
+    
+            const data = await response.json();
+    
+            if (!response.ok) {
+                alert(`오류 발생: ${data.detail || "알 수 없는 오류"}`);
+            } else {
+                alert(`피드백이 저장되었습니다! ID: ${data.id}`);
+                feedbackInput.value = '';
+            }
+    
+        } catch (error) {
+            alert(`전송 실패: ${error.message}`);
+        } finally {
+            // 완료 후 원상복구
+            submitButton.disabled = false;
+            spinner.style.display = 'none';
+        }
+    });    
 
-        const data = await response.json();
-        alert(`피드백이 저장되었습니다! ID: ${data.id}`);
-        feedbackInput.value = '';
+    feedbackToggle.addEventListener("click", () => {
+        feedbackBox.classList.toggle("show");
+    });
 
-    } catch (error) {
-        alert(`전송 실패: ${error.message}`);
-    }
+    updateEmotion('happy');
 });
