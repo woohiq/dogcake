@@ -1,12 +1,18 @@
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
+from sqlalchemy import create_engine, Column, Integer, String, DateTime
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import sessionmaker, Session
+from datetime import datetime
 import google.generativeai as genai
 import os
-
+# from dotenv import load_dotenv - for local
+# load_dotenv()
 app = FastAPI()
+print("현재 DATABASE_URL:", os.getenv("DATABASE_URL"))
 
 # 정적 파일 설정 (/static 경로로 css, js, 이미지 접근)
 app.mount("/static", StaticFiles(directory="static"), name="static")
@@ -58,6 +64,39 @@ class ChatRequest(BaseModel):
 class ChatResponse(BaseModel):
     response: str
 
+# ---------- DB 연결 ----------
+DATABASE_URL = os.getenv("DATABASE_URL")
+engine = create_engine(DATABASE_URL, connect_args={"sslmode": "require"})
+SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+Base = declarative_base()
+
+class Feedback(Base):
+    __tablename__ = "feedback"
+    id = Column(Integer, primary_key=True, index=True)  # 피드백 ID (PK)
+    message = Column(String, nullable=False)            # 피드백 내용
+    created_at = Column(DateTime, default=datetime.utcnow)  # 피드백 시간
+
+Base.metadata.create_all(bind=engine)
+
+class FeedbackIn(BaseModel):
+    feedback: str
+
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
+
+@app.post("/api/feedback")
+async def submit_feedback(feedback_data: FeedbackIn, db: Session = Depends(get_db)):
+    feedback = Feedback(message=feedback_data.feedback)
+    db.add(feedback)
+    db.commit()
+    db.refresh(feedback)
+    return {"message": "피드백 저장 완료", "id": feedback.id}
+
+# ---------- 챗봇 ----------
 @app.post("/chat", response_model=ChatResponse)
 async def chat(request_data: ChatRequest):
     try:

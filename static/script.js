@@ -78,3 +78,37 @@ function updateEmotion(emotion) {
 }
 
 window.onload = () => updateEmotion('happy');
+
+const feedbackInput = document.getElementById('feedback-input');
+const submitButton = document.getElementById('submit-feedback');
+
+submitButton.addEventListener('click', async () => {
+    const feedback = feedbackInput.value.trim();
+    if (!feedback) {
+        alert("피드백을 입력해주세요!");
+        return;
+    }
+
+    try {
+        const response = await fetch('/api/feedback', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ feedback: feedback })
+        });
+
+        if (!response.ok) {
+            const errorData = await response.json();
+            alert(`오류 발생: ${errorData.detail || "알 수 없는 오류"}`);
+            return;
+        }
+
+        const data = await response.json();
+        alert(`피드백이 저장되었습니다! ID: ${data.id}`);
+        feedbackInput.value = '';
+
+    } catch (error) {
+        alert(`전송 실패: ${error.message}`);
+    }
+});
