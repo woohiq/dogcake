@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fruit Box Game</title>
+    <link rel="stylesheet" href="/static/css/sidebar.css">       <!-- 사이드바 CSS 추가 -->
+    <link rel="stylesheet" href="/static/css/applegame.css">     <!-- 게임 전용 CSS -->
+</head>
+<body>
+    <div class="page-wrapper">
+        <!-- ✅ 사이드바 -->
+        <aside id="sidebar">
+            <button class="toggle-btn" onclick="toggleSidebar()">»</button>
+            <div class="menu-item"><a href="/">🏠 Home</a></div>
+            <div class="menu-item"><a href="/bananaquiz">🍌 Banana Quiz</a></div>
+        </aside>
+
+        <!-- ✅ 본문 게임 UI -->
+        <div id="main-content">
+            <h1>Fruit Box Game</h1>
+            <h2>점수: <span id="score">0</span></h2>
+            <h3>남은 시간: <span id="timer">120</span>초</h3>
+            <div id="gameContainer"></div>
+        </div>
+    </div>
+
+    <script src="/static/js/applegame.js"></script>
+    <script>
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('expanded');
+        }
+    </script>
+</body>
+</html>

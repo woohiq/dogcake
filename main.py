@@ -9,8 +9,8 @@ from sqlalchemy.orm import sessionmaker, Session
 from datetime import datetime
 import google.generativeai as genai
 import os
-# from dotenv import load_dotenv # local
-# load_dotenv()
+from dotenv import load_dotenv # local
+load_dotenv()
 app = FastAPI()
 print("현재 DATABASE_URL:", os.getenv("DATABASE_URL"))
 
@@ -21,6 +21,12 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 @app.get("/")
 async def serve_index():
     return FileResponse("frontend/index.html")
+
+# applegame.html 반환
+@app.get("/applegame")
+async def serve_applegame():
+    return FileResponse("frontend/applegame.html")
+
 
 # CORS 설정
 app.add_middleware(

@@ -1,0 +1,61 @@
+/* --- 사이드바 전체 래퍼 --- */
+.page-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+/* --- 사이드바 기본 스타일 --- */
+#sidebar {
+    width: 60px;
+    background-color: #222;
+    color: white;
+    height: 100vh;
+    transition: width 0.3s ease;
+    overflow: hidden;
+    position: relative;
+}
+
+/* --- 사이드바 확장 시 --- */
+#sidebar.expanded {
+    width: 200px;
+}
+
+/* --- 토글 버튼 --- */
+.toggle-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    background-color: red;
+    color: white;
+    border: none;
+    margin: 10px;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+/* --- 메뉴 항목 --- */
+.menu-item {
+    display: none;
+    padding: 0;
+    margin-bottom: 10px;
+}
+
+/* --- 사이드바가 확장되었을 때 메뉴 보임 --- */
+#sidebar.expanded .menu-item {
+    display: block;
+}
+
+/* --- 메뉴 링크 스타일 --- */
+.menu-item a {
+    color: white;
+    text-decoration: none;
+    display: block;
+    padding: 10px;
+    border: 1px solid #4CAF50;
+    border-radius: 4px;
+    margin: 10px auto;
+    max-width: 160px;
+    box-sizing: border-box;
+}

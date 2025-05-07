@@ -3,34 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <title>독케익</title>
-    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="/static/css/style.css">
     <link rel="icon" href="/static/favicon.ico" type="image/x-icon">
 </head>
 <body>
+    <div class="page-wrapper">
+        <!-- ✅ 왼쪽 사이드바 -->
+        <aside id="sidebar">
+            <button class="toggle-btn" onclick="toggleSidebar()">»</button>
+            <div class="menu-item"><a href="/applegame">🍎 Apple Game</a></div>
+            <div class="menu-item"><a href="/bananaquiz">🍌 Banana Quiz</a></div>
+        </aside>
 
-    <!-- 챗봇 UI -->
-    <div id="chat-container">
-        <h1>V.1.0</h1>
-        
-        <!-- 피드백 토글 버튼 -->
-        <button id="feedback-toggle" type="button">피드백 보내기</button>
+        <!-- 🧠 챗봇 UI -->
+        <div id="chat-container">
+            <h1>V.1.0</h1>
 
-        <!-- ✅ 피드백 입력 폼 (위치를 chat-container 안으로 이동) -->
-        <div id="feedback-container">
-            <h2>피드백</h2>
-            <textarea id="feedback-input" placeholder="피드백을 입력하세요..."></textarea>
-            <button id="submit-feedback" type="button">피드백 보내기</button>
-            <div id="feedback-spinner" class="spinner" style="display: none;"></div>
+            <button id="feedback-toggle" type="button">피드백 보내기</button>
+
+            <div id="feedback-container">
+                <h2>피드백</h2>
+                <textarea id="feedback-input" placeholder="피드백을 입력하세요..."></textarea>
+                <button id="submit-feedback" type="button">피드백 보내기</button>
+                <div id="feedback-spinner" class="spinner" style="display: none;"></div>
+            </div>
+
+            <div id="image-area">
+                <img id="emotion-image" src="/static/images/neutral.png" alt="채트보트 표정">
+            </div>
+
+            <div id="chat-log"></div>
+            <input type="text" id="user-input" placeholder="질문을 입력하세요...">
+            <button id="send-button" type="button">보내기</button>
         </div>
-
-        <div id="image-area">
-            <img id="emotion-image" src="/static/images/neutral.png" alt="채트보트 표정">
-        </div>
-        <div id="chat-log"></div>
-        <input type="text" id="user-input" placeholder="질문을 입력하세요...">
-        <button id="send-button" type="button">보내기</button>
     </div>
 
-    <script src="/static/script.js"></script>
+    <script src="/static/js/script.js"></script>
+    <script>
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('expanded');
+        }
+    </script>
 </body>
 </html>
