@@ -48,8 +48,10 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // 박스 드래그 시작 - 오직 게임 영역 내에서만 작동
-    gameContainer.addEventListener("mousedown", (e) => {
+    document.addEventListener("mousedown", (e) => {
+        // ✅ 사이드바 내부는 제외
+        if (e.target.closest('#sidebar')) return;
+    
         startX = e.clientX;
         startY = e.clientY;
         dragBox = document.createElement("div");
@@ -59,8 +61,7 @@ document.addEventListener("DOMContentLoaded", () => {
         dragBox.style.position = "absolute";
         document.body.appendChild(dragBox);
     });
-
-    // 박스 드래그 진행 - 전역 이벤트로 유지
+    
     document.addEventListener("mousemove", (e) => {
         if (!dragBox) return;
         endX = e.clientX;
@@ -70,14 +71,14 @@ document.addEventListener("DOMContentLoaded", () => {
         dragBox.style.left = `${Math.min(startX, endX)}px`;
         dragBox.style.top = `${Math.min(startY, endY)}px`;
     });
-
-    // 박스 드래그 종료
+    
     document.addEventListener("mouseup", () => {
         if (!dragBox) return;
         checkApplesInBox();
         document.body.removeChild(dragBox);
         dragBox = null;
     });
+    
     // 박스 내의 사과 검사 (사과의 중심이 박스 내부에 있는 경우만 선택)
     function checkApplesInBox() {
         let selectedApples = [];
