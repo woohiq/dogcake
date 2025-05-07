@@ -144,18 +144,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
     }
 
-    // 재시작 버튼 생성 및 클릭 이벤트 추가
+    // 게임 시작 직전
     const restartButton = document.createElement("button");
     restartButton.textContent = "재시작";
-    restartButton.style.margin = "10px";
-    restartButton.style.padding = "10px 20px";
-    restartButton.style.fontSize = "16px";
-    restartButton.style.cursor = "pointer";
+    restartButton.className = "restart-button";
     restartButton.addEventListener("click", (e) => {
-        e.stopPropagation(); // 다른 이벤트로 전달되지 않도록 중단
+        e.stopPropagation();
         resetGame();
     });
-    document.body.appendChild(restartButton);
+
+    // ✅ 게임판 바로 아래에 추가
+    gameContainer.insertAdjacentElement('afterend', restartButton);
 
     // 게임 시작
     createApples();
