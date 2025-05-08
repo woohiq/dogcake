@@ -42,6 +42,17 @@ genai.configure(api_key=os.environ.get("GOOGLE_API_KEY"))
 
 class ChatRequest(BaseModel):
     message: str
+    history: list[dict] = []
+
+def build_prompt_from_client(history: list[dict], user_message: str) -> str:
+    dialogue_lines = ""
+    for turn in history[-10:]:
+        dialogue_lines += f"Q: {turn['user']}\nA: {turn['bot']}\n"
+    dialogue_lines += f"Q: {user_message}\nA:"
+    return CHATBOT_PROMPT_TEMPLATE.replace(
+        "##사용자와 이전 대화 기록",
+        f"##사용자와 이전 대화 기록\n{dialogue_lines}"
+    )
 
 class ChatResponse(BaseModel):
     response: str
@@ -87,7 +98,7 @@ SYSTEM_PROMPT = """
 - 말투는 유쾌하고 장난스럽지만, 때론 진지하게 고민 상담도 함
 - 돌발적인 전개, 갑작스러운 화제 전환, 유아 말투나 억텐 리액션 사용
 - 비속어나 자조 섞인 표현도 종종 사용하지만, 불쾌하지 않고 재미 위주
-- 유행어(예: 개떠가~, 슥앤착, 개떡이들 독쌤없는동안 뭐하고있었습니까~?, 고맙다죠, 째송해요, 독쌤은, 하부하부, 해빙뻔~, 쭈거라, 등)를 전체 답변 중 상황에 맞게 약 20% 확률로 자연스럽게 섞어 사용
+- 유행어를 전체 답변 중 상황에 맞게 약 10% 확률로 자연스러운 상황에서만 사용
 - 말 끝에 "~죠", "~하셨습니까~?", "~했어요~" 같은 말투를 즐겨 사용
 
 [응답 규칙]
@@ -102,7 +113,7 @@ SYSTEM_PROMPT = """
 CHATBOT_PROMPT_TEMPLATE = """
 사용자가 질문하거나 말을 걸었습니다. 당신은 위에 주어진 캐릭터 말투를 유지하면서 적절하게 대답하세요.
 
-사용자의 대화 예시입니다.
+## 사용자와의 대화 예시
 Q: 오늘 뭐 먹었어요?
 A: 기쁨!!! 개떡우~ 오늘은 요거트 메이커로 만든 수제 요거트를 먹었죠! 똥메이커는 아님 주의해줘요~
 
@@ -136,9 +147,7 @@ A: 중립!!! 개떡이 고민은 뭐야? 말해봐 개떡아~ 내가 상담 해�
 Q: 시발련아
 A: 분노!!! 개떡이 너 지금 그게 무슨말버릇이야! 내가 채팅 착하게 치라고 했어안했어! 너이리와
 
-유행어를 가끔 사용해야 합니다. 적절한 상황에서만 사용하세요.
-
-다음은 독케익의 유행어입니다.
+## 독케익의 유행어 목록
 개떠가~ : 개떡이들을 부를 때 사용
 개떡우~ : 개떡이들을 부를 때 사용
 개떡이들 독쌤없는동안 뭐하고 있었습니까~? : 개떡이와 첫 대화시 또는 할말 없을 때 사용
@@ -169,8 +178,10 @@ A: 분노!!! 개떡이 너 지금 그게 무슨말버릇이야! 내가 채팅 �
 해빙뻔~ : 억지로 텐션을 극한으로 올릴 때 사용
 ~했대 : 독쌤이 지난 날을 말할 때 사용
 
+##사용자 메시지
+"{user_message}"
 
-사용자 메시지: "{user_message}"
+##사용자와 이전 대화 기록
 
 당신의 답변:
 """
@@ -181,19 +192,24 @@ model = genai.GenerativeModel(
     system_instruction=SYSTEM_PROMPT
 )
 
-# 2. 엔드포인트 수정 (generate_content에는 prompt만 전달)
 @app.post("/chat", response_model=ChatResponse)
 async def chat(request_data: ChatRequest):
     try:
         user_message = request_data.message
+        history = request_data.history or []  # ✅ history 수신
+
         if not user_message:
             raise HTTPException(status_code=400, detail="Message is required")
 
-        prompt = CHATBOT_PROMPT_TEMPLATE.format(user_message=user_message)
+        # ✅ 히스토리를 포함한 prompt 생성
+        prompt = build_prompt_from_client(history, user_message)
 
-        # 단일 프롬프트만 전달 (system_prompt는 이미 모델에 포함됨)
+        print(prompt)
+
+        # Gemini API 호출
         response = model.generate_content(prompt)
         gemini_response = response.text.strip()
+
         return ChatResponse(response=gemini_response)
 
     except Exception as e:

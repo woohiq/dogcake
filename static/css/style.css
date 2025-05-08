@@ -66,6 +66,24 @@ body {
     cursor: pointer;
 }
 
+#reset-history {
+    position: absolute;
+    top: 20px;
+    right: 130px;
+    background-color: #434343;
+    color: white;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    z-index: 10;
+    transition: background-color 0.3s ease;
+}
+
+#reset-history:hover {
+    background-color: #212111;
+}
+
 #send-button:hover {
     background-color: #45a049;
 }

@@ -11,6 +11,9 @@ userInput.addEventListener('keypress', function (event) {
     }
 });
 
+// 최초 로딩 시 sessionStorage에서 불러오기
+let chatHistory = JSON.parse(sessionStorage.getItem('chatHistory') || '[]');
+
 async function sendMessage() {
     const message = userInput.value.trim();
     if (!message) return;
@@ -19,21 +22,24 @@ async function sendMessage() {
     userInput.value = '';
 
     try {
-        const response = await fetch(backendUrl, {
+        // 백엔드로 보낼 최근 히스토리 10개만 추출
+        const payload = {
+            message: message,
+            history: chatHistory.slice(-10)
+        };
+
+        const response = await fetch('/chat', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ message })
+            body: JSON.stringify(payload)
         });
-
-        if (!response.ok) {
-            const errorData = await response.json();
-            appendMessage('bot', `오류: ${errorData.error || '알 수 없는 오류'}`);
-            updateEmotion('neutral');
-            return;
-        }
 
         const data = await response.json();
         const rawResponse = data.response;
+
+        // 히스토리에 추가하고 저장
+        chatHistory.push({ user: message, bot: rawResponse });
+        sessionStorage.setItem('chatHistory', JSON.stringify(chatHistory));
 
         const sentiment = analyzeSentiment(rawResponse);
         updateEmotion(sentiment);
@@ -46,6 +52,15 @@ async function sendMessage() {
         updateEmotion('neutral');
     }
 }
+
+document.getElementById("reset-history").addEventListener("click", () => {
+    if (confirm("정말 대화 기록을 초기화할까요?")) {
+        chatHistory = [];
+        sessionStorage.removeItem("chatHistory");
+        chatLog.innerHTML = ''; // 화면상 메시지 제거
+        updateEmotion('happy');
+    }
+});
 
 function appendMessage(sender, text) {
     const messageDiv = document.createElement('div');
