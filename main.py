@@ -204,8 +204,6 @@ async def chat(request_data: ChatRequest):
         # ✅ 히스토리를 포함한 prompt 생성
         prompt = build_prompt_from_client(history, user_message)
 
-        print(prompt)
-
         # Gemini API 호출
         response = model.generate_content(prompt)
         gemini_response = response.text.strip()
