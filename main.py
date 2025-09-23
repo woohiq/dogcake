@@ -27,6 +27,11 @@ async def serve_index():
 async def serve_applegame():
     return FileResponse("frontend/applegame.html")
 
+# bananaquiz.html 반환
+@app.get("/bananaquiz")
+async def serve_bananaquiz():
+    return FileResponse("frontend/bananaquiz.html")
+
 
 # CORS 설정
 app.add_middleware(

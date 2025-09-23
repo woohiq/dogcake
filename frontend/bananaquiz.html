@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>MICE STAR - 독케익</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/sidebar.css">
+    <link rel="icon" href="/static/favicon.ico" type="image/x-icon">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body, html {
+            height: 100%;
+            overflow-x: hidden;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .page-wrapper {
+            position: relative;
+            height: 100vh;
+        }
+
+        #main-content {
+            flex: 1;
+            margin-left: 0;
+            height: 100vh;
+            overflow-y: auto;
+            scroll-behavior: smooth;
+            scroll-snap-type: y mandatory;
+            position: relative;
+            z-index: 1;
+        }
+
+        .section {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            scroll-snap-align: start;
+            padding: 0 5%;
+        }
+
+        /* 상단 네비게이션 */
+        .nav-bar {
+            position: fixed;
+            top: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 20px 40px;
+            display: flex;
+            gap: 80px;
+            background: rgba(0, 0, 0, 0.05);
+            backdrop-filter: blur(10px);
+            width: 100%;
+            justify-content: flex-end;
+        }
+
+        .nav-item {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 14px;
+            transition: opacity 0.3s;
+        }
+
+        .nav-item:hover {
+            opacity: 0.7;
+        }
+
+        .brand-logo {
+            position: fixed;
+            top: 20px;
+            left: 80px;
+            z-index: 1001;
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        /* 사이드바 오버레이 스타일 */
+        #sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            height: 100vh;
+            width: 60px;
+            z-index: 1002;
+            transition: width 0.3s ease;
+        }
+
+        #sidebar.expanded {
+            width: 200px;
+        }
+
+        /* 섹션 1 - 파란색 인트로 */
+        .section-1 {
+            background: linear-gradient(135deg, #4a90e2, #357abd);
+            color: white;
+            text-align: center;
+            flex-direction: column;
+        }
+
+        .section-1 .content {
+            max-width: 1200px;
+            width: 100%;
+            position: relative;
+            z-index: 2;
+        }
+
+        .section-1 h1 {
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 40px;
+            letter-spacing: -2px;
+        }
+
+        .section-1 .highlight {
+            font-size: clamp(12rem, 20vw, 18rem);
+            font-weight: 900;
+            opacity: 0.15;
+            position: absolute;
+            right: -5%;
+            top: 20%;
+            transform: translateY(-50%);
+            z-index: 1;
+        }
+
+        .scroll-hint {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-size: 16px;
+            opacity: 0.8;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            animation: bounce 2s infinite;
+        }
+
+        .scroll-hint::after {
+            content: '↓';
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateX(-50%) translateY(0);
+            }
+            40% {
+                transform: translateX(-50%) translateY(-10px);
+            }
+            60% {
+                transform: translateX(-50%) translateY(-5px);
+            }
+        }
+
+        /* 섹션 2 - MICE STAR 로고 */
+        .section-2 {
+            background: #1a1a1a;
+            color: white;
+            text-align: center;
+        }
+
+        .mice-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .logo-symbol {
+            width: 80px;
+            height: 80px;
+            position: relative;
+        }
+
+        .logo-blue {
+            width: 40px;
+            height: 40px;
+            background: #4a90e2;
+            position: absolute;
+            top: 0;
+            right: 0;
+        }
+
+        .logo-orange {
+            width: 40px;
+            height: 40px;
+            background: #ff6b35;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+        }
+
+        .mice-text {
+            font-size: 2.5rem;
+            font-weight: 900;
+            letter-spacing: 3px;
+        }
+
+        .description {
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.8;
+            font-size: 1.1rem;
+            opacity: 0.8;
+        }
+
+        /* 섹션 3 - 메인 메시지 */
+        .section-3 {
+            background: #1a1a1a;
+            color: white;
+            text-align: center;
+        }
+
+        .section-3 h2 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 300;
+            letter-spacing: -1px;
+            line-height: 1.3;
+        }
+
+        /* 섹션 4 - VISION */
+        .section-4 {
+            background: #1a1a1a;
+            color: white;
+        }
+
+        .vision-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        .vision-text h3 {
+            font-size: 3rem;
+            font-weight: 300;
+            margin-bottom: 30px;
+            color: #4a90e2;
+        }
+
+        .vision-description {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            opacity: 0.9;
+        }
+
+        .vision-image {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(135deg, #4a90e2, #1a1a1a);
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hand-illustration {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            width: 150px;
+            height: 150px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+        }
+
+        .data-points {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.3;
+        }
+
+        .data-point {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: white;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        /* 반응형 */
+        @media (max-width: 768px) {
+            .brand-logo {
+                left: 20px;
+                font-size: 16px;
+            }
+
+            .nav-bar {
+                padding: 20px;
+                gap: 40px;
+            }
+
+            .vision-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                text-align: center;
+            }
+
+            .section-1 .highlight {
+                display: none;
+            }
+
+            #sidebar {
+                width: 50px;
+            }
+
+            #sidebar.expanded {
+                width: 180px;
+            }
+
+            .scroll-hint {
+                font-size: 14px;
+                bottom: 30px;
+            }
+
+            .scroll-hint::after {
+                font-size: 20px;
+            }
+        }
+
+        /* 스크롤 인디케이터 */
+        .scroll-indicator {
+            position: fixed;
+            right: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .scroll-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .scroll-dot.active {
+            background: white;
+            transform: scale(1.5);
+        }
+    </style>
+</head>
+<body>
+    <div class="page-wrapper">
+        <!-- 왼쪽 사이드바 -->
+        <aside id="sidebar">
+            <button class="toggle-btn" onclick="toggleSidebar()">»</button>
+            <div class="menu-item"><a href="/">🏠 메인</a></div>
+            <div class="menu-item"><a href="/applegame">🍎 Apple Game</a></div>
+            <div class="menu-item"><a href="/bananaquiz">🍌 Banana Quiz</a></div>
+        </aside>
+
+        <!-- 브랜드 로고 -->
+        <div class="brand-logo">MICE★STAR</div>
+
+        <!-- 상단 네비게이션 -->
+        <nav class="nav-bar">
+            <a href="#" class="nav-item">브랜드</a>
+            <a href="#" class="nav-item">프로젝트</a>
+            <a href="#" class="nav-item">출판물</a>
+            <a href="#" class="nav-item">다당X행정</a>
+            <a href="#" class="nav-item">아카이브</a>
+            <a href="#" class="nav-item">문의</a>
+        </nav>
+
+        <!-- 스크롤 인디케이터 -->
+        <div class="scroll-indicator">
+            <div class="scroll-dot active" data-section="0"></div>
+            <div class="scroll-dot" data-section="1"></div>
+            <div class="scroll-dot" data-section="2"></div>
+            <div class="scroll-dot" data-section="3"></div>
+        </div>
+
+        <!-- 메인 컨텐츠 -->
+        <div id="main-content">
+            <!-- 섹션 1: 인트로 -->
+            <section class="section section-1">
+                <div class="content">
+                    <h1>A NEW STANDARD<br>THAT REFLECTS<br>THE POSSIBILITY<br>OF MICE TOURISM</h1>
+                </div>
+                <div class="highlight">M</div>
+                <div class="scroll-hint">아래로 내려보세요</div>
+            </section>
+
+            <!-- 섹션 2: MICE STAR 로고 -->
+            <section class="section section-2">
+                <div class="content">
+                    <div class="mice-logo">
+                        <div class="logo-symbol">
+                            <div class="logo-blue"></div>
+                            <div class="logo-orange"></div>
+                        </div>
+                        <div class="mice-text">MICE STAR</div>
+                    </div>
+                    <div class="description">
+                        지역의 MICE 가능성을 비추고<br>
+                        지속가능한 도시 관광 전략의 기준을 제시하는<br>
+                        MICE 관광 경험 중화 플랫폼 제작 브랜드
+                    </div>
+                </div>
+            </section>
+
+            <!-- 섹션 3: 메인 메시지 -->
+            <section class="section section-3">
+                <div class="content">
+                    <h2>MICE, 그 가능성은 이제 STAR로 비춰진다.</h2>
+                </div>
+            </section>
+
+            <!-- 섹션 4: VISION -->
+            <section class="section section-4">
+                <div class="vision-content">
+                    <div class="vision-text">
+                        <h3>VISION</h3>
+                        <div class="vision-description">
+                            문화의 MICE 정립을 선명하게 비추고,<br>
+                            도시와 사람이 지속스럽게 이어지는 지속가능한 도시 관광의 미래를 열다.
+                        </div>
+                    </div>
+                    <div class="vision-image">
+                        <div class="data-points">
+                            <div class="data-point" style="top: 20%; left: 15%;"></div>
+                            <div class="data-point" style="top: 30%; left: 45%;"></div>
+                            <div class="data-point" style="top: 50%; left: 25%;"></div>
+                            <div class="data-point" style="top: 60%; left: 70%;"></div>
+                            <div class="data-point" style="top: 80%; left: 40%;"></div>
+                            <div class="data-point" style="top: 25%; left: 80%;"></div>
+                        </div>
+                        <div class="hand-illustration">👆</div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <script>
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('expanded');
+        }
+
+        // 스크롤 인디케이터 기능
+        const mainContent = document.getElementById('main-content');
+        const scrollDots = document.querySelectorAll('.scroll-dot');
+        const sections = document.querySelectorAll('.section');
+
+        // 스크롤 위치에 따른 인디케이터 업데이트
+        mainContent.addEventListener('scroll', () => {
+            const scrollTop = mainContent.scrollTop;
+            const sectionHeight = window.innerHeight;
+            const currentSection = Math.round(scrollTop / sectionHeight);
+
+            scrollDots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentSection);
+            });
+        });
+
+        // 인디케이터 클릭으로 섹션 이동
+        scrollDots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                const targetSection = sections[index];
+                targetSection.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        // 마우스 휠로 섹션별 스크롤
+        let isScrolling = false;
+        mainContent.addEventListener('wheel', (e) => {
+            if (isScrolling) return;
+            
+            e.preventDefault();
+            isScrolling = true;
+            
+            const currentScroll = mainContent.scrollTop;
+            const sectionHeight = window.innerHeight;
+            const currentSection = Math.round(currentScroll / sectionHeight);
+            
+            let targetSection;
+            if (e.deltaY > 0) {
+                // 아래로 스크롤
+                targetSection = Math.min(currentSection + 1, sections.length - 1);
+            } else {
+                // 위로 스크롤
+                targetSection = Math.max(currentSection - 1, 0);
+            }
+            
+            sections[targetSection].scrollIntoView({ behavior: 'smooth' });
+            
+            setTimeout(() => {
+                isScrolling = false;
+            }, 1000);
+        });
+
+        // 키보드 네비게이션
+        document.addEventListener('keydown', (e) => {
+            const currentScroll = mainContent.scrollTop;
+            const sectionHeight = window.innerHeight;
+            const currentSection = Math.round(currentScroll / sectionHeight);
+            
+            if (e.key === 'ArrowDown' || e.key === ' ') {
+                e.preventDefault();
+                const targetSection = Math.min(currentSection + 1, sections.length - 1);
+                sections[targetSection].scrollIntoView({ behavior: 'smooth' });
+            } else if (e.key === 'ArrowUp') {
+                e.preventDefault();
+                const targetSection = Math.max(currentSection - 1, 0);
+                sections[targetSection].scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+    </script>
+</body>
+</html> 
