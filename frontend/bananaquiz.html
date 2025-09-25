@@ -20,6 +20,11 @@
             font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
+            scroll-behavior: smooth;
+        }
+        
+        * {
+            scroll-behavior: smooth;
         }
 
         .page-wrapper {
@@ -35,9 +40,10 @@
             overflow-y: auto;
             overflow-x: hidden;
             scroll-behavior: smooth;
-            scroll-snap-type: y mandatory;
+            scroll-snap-type: none; /* 마우스 휠 이벤트로 제어하므로 비활성화 */
             position: relative;
             z-index: 1;
+            overscroll-behavior: none;
         }
 
         .section {
@@ -84,10 +90,13 @@
             top: 20px;
             left: 40px;
             z-index: 1001;
-            color: white;
-            font-size: 20px;
-            font-weight: bold;
-            letter-spacing: 2px;
+            cursor: pointer;
+        }
+
+        .brand-logo img {
+            height: 40px;
+            width: auto;
+            filter: brightness(0) invert(1); /* 로고를 흰색으로 */
         }
 
         /* 사이드바 숨김 */
@@ -109,6 +118,12 @@
             position: relative;
             z-index: 2;
             padding: 0 40px;
+        }
+
+        .section-1 .main-text-image {
+            max-width: 90%;
+            height: auto;
+            margin-bottom: 30px;
         }
 
         .section-1 h1 {
@@ -169,6 +184,75 @@
             color: white;
             text-align: center;
             padding: 0 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* 오버레이 로고들 */
+        .overlay-logos {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .overlay-logo {
+            position: absolute;
+            opacity: 0.1;
+            filter: brightness(0) invert(1);
+            height: 80px; /* 모든 이미지 세로 크기 동일 */
+            width: auto;
+        }
+
+        /* 세세한 요청사항에 따른 정확한 위치 */
+        .overlay-1 {
+            top: 80px; /* 메뉴 높이만큼 아래로 */
+            left: 0;
+            opacity: 0.08;
+        }
+
+        .overlay-2 {
+            top: calc(15% + 80px); /* 메뉴 높이 + 기존 15% */
+            left: 0;
+            opacity: 0.1;
+        }
+
+        .overlay-3 {
+            /* 3번은 일단 숨김 처리 */
+            display: none;
+        }
+
+        .overlay-4 {
+            top: 35%;
+            right: 0;
+            opacity: 0.09;
+        }
+
+        .overlay-5 {
+            top: 55%;
+            right: 0;
+            opacity: 0.11;
+        }
+
+        .overlay-6 {
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0.08;
+        }
+
+        .overlay-7 {
+            top: 60%;
+            left: 0;
+            opacity: 0.1;
+        }
+
+        .section-2 .content {
+            position: relative;
+            z-index: 2;
         }
 
         .mice-logo {
@@ -212,7 +296,51 @@
         .section-4 {
             background: #1a1a1a;
             color: white;
-            padding: 0 40px;
+            padding: 0; /* 패딩 제거하여 이미지가 전체 너비 사용 가능 */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .vision-content {
+            position: relative;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        .vision-image-container {
+            position: relative;
+            width: 80%; /* 화면의 80% 차지 */
+            margin: 0 auto; /* 좌우 10%씩 여백 */
+            display: flex;
+            justify-content: center;
+        }
+
+        .vision-image-container img {
+            width: 100%;
+            height: auto;
+            border-radius: 20px;
+        }
+
+        .vision-text-overlay {
+            position: absolute;
+            bottom: 40px;
+            left: 40px;
+            color: white;
+            z-index: 2;
+        }
+
+        .vision-text-overlay h3 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+        }
+
+        .vision-text-overlay .vision-description {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            max-width: 600px;
         }
 
         .mission-content {
@@ -377,7 +505,7 @@
 
         .hashtag-scroll {
             display: flex;
-            animation-duration: 20s;
+            animation-duration: 90s;
             animation-timing-function: linear;
             animation-iteration-count: infinite;
         }
@@ -388,7 +516,7 @@
         }
 
         .hashtag-row-2 {
-            animation-name: slideLeft2;
+            animation-name: slideRight2;
             animation-delay: 1s;
         }
 
@@ -400,10 +528,10 @@
         .hashtag {
             background: white;
             color: #1a1a1a;
-            padding: 12px 24px;
-            border-radius: 8px;
-            margin: 0 8px;
-            font-size: 1.3rem;
+            padding: 18px 36px;
+            border-radius: 12px;
+            margin: 0 12px;
+            font-size: 1.95rem;
             font-weight: 600;
             display: inline-block;
             flex-shrink: 0;
@@ -435,17 +563,17 @@
 
         @keyframes slideLeft1 {
             0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
+            100% { transform: translateX(-100%); }
         }
 
-        @keyframes slideLeft2 {
+        @keyframes slideRight2 {
             0% { transform: translateX(0); }
-            100% { transform: translateX(50%); }
+            100% { transform: translateX(100%); }
         }
 
         @keyframes slideLeft3 {
             0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
+            100% { transform: translateX(-100%); }
         }
 
         /* 섹션 6 - Core Value */
@@ -460,35 +588,234 @@
             position: relative;
         }
 
-        .vision-content {
+        /* 섹션 8 - 유튜브 동영상 */
+        .section-8 {
+            background: #1a1a1a;
+            color: white;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh; /* 정확한 섹션 높이 보장 */
+        }
+
+        .video-content {
+            width: 80%;
+            max-width: 1200px;
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            height: 0;
+            padding-bottom: 56.25%; /* 16:9 비율 */
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .video-container {
+            position: relative;
+        }
+
+        /* 섹션 9 - 카드들 */
+        .section-9 {
+            background: #1a1a1a;
+            color: white;
+            padding: 60px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh; /* 정확한 섹션 높이 보장 */
+            box-sizing: border-box;
+        }
+
+        .cards-content {
+            width: 100%;
+            max-width: 1400px;
+            text-align: center;
+        }
+
+        .cards-header h2 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 60px;
+            line-height: 1.3;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 30px;
+        }
+
+        .info-card {
+            background: linear-gradient(135deg, #4a90e2, #357abd);
+            border-radius: 20px;
+            padding: 40px 30px;
+            height: 300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .info-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .info-card h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            line-height: 1.4;
+            margin-bottom: 20px;
+        }
+
+        .card-button {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 25px;
+            color: white;
+            padding: 12px 24px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .card-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* 섹션 10 - 협력 회사 로고들 */
+        .section-10 {
+            background: linear-gradient(180deg, #1a1a1a 0%, #fff 50%);
+            color: #333;
+            padding: clamp(40px, 8vh, 60px) clamp(20px, 5vw, 40px) 0;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            min-height: 100vh; /* 정확한 섹션 높이 보장 */
+            box-sizing: border-box;
+        }
+
+        .partners-content {
+            width: 100%;
+            max-width: 1200px;
+            text-align: center;
+            padding-top: clamp(15px, 3vh, 25px);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            min-height: 90vh;
+        }
+
+        .partners-logos {
+            margin-bottom: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 40vh;
+            margin-top: clamp(60px, 15vh, 120px);
+        }
+
+        .logo-row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: clamp(15px, 4vw, 50px);
+            margin-bottom: clamp(20px, 3vh, 40px);
+            flex-wrap: nowrap;
+        }
+
+        .logo-row.top-row {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto clamp(20px, 3vh, 40px);
+        }
+
+        .logo-row.bottom-row {
+            width: 100%;
+            max-width: 1000px;
+            margin: 0 auto clamp(20px, 3vh, 40px);
+        }
+
+        .logo-row img {
+            height: clamp(40px, 6vh, 60px);
+            width: auto;
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+            object-fit: contain;
+            flex: 0 0 auto;
+        }
+
+        .logo-row img:hover {
+            opacity: 1;
+        }
+
+        .partners-message {
+            margin: clamp(60px, 10vh, 100px) 0 clamp(40px, 8vh, 80px);
+            font-size: clamp(0.95rem, 2.5vw, 1.1rem);
+            line-height: 1.5;
+            color: #333;
+            margin-top: auto;
+        }
+
+        .footer-content {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 60px;
-            align-items: center;
-            max-width: 1200px;
-            width: 100%;
-        }
-
-        .vision-text h3 {
-            font-size: 3rem;
-            font-weight: 300;
-            margin-bottom: 30px;
-            color: #4a90e2;
-        }
-
-        .vision-description {
-            font-size: 1.2rem;
-            line-height: 1.8;
-            opacity: 0.9;
-        }
-
-        .vision-image {
-            width: 100%;
-            height: 400px;
-            background: linear-gradient(135deg, #4a90e2, #1a1a1a);
-            border-radius: 20px;
+            padding: 30px 0 20px;
+            border-top: 1px solid #eee;
+            background: white;
+            margin-top: auto;
+            text-align: left;
             position: relative;
-            overflow: hidden;
+            bottom: 0;
+        }
+
+        .footer-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #4a90e2;
+            margin-bottom: 15px;
+        }
+
+        .footer-info p {
+            margin: 3px 0;
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        .footer-right {
+            text-align: right;
+        }
+
+        .footer-right p {
+            margin: 3px 0;
+            color: #333;
+            font-size: 0.9rem;
+        }
+
+        .contact-email {
+            font-weight: 600;
+            font-size: 1rem !important;
+            color: #4a90e2 !important;
+        }
+
+        .disclaimer {
+            font-size: 0.75rem !important;
+            color: #999 !important;
         }
 
         .hand-illustration {
@@ -540,11 +867,7 @@
                 gap: 40px;
             }
 
-            .vision-content {
-                grid-template-columns: 1fr;
-                gap: 40px;
-                text-align: center;
-            }
+            /* 중복된 모바일 vision CSS 제거됨 */
 
             .value-cards {
                 grid-template-columns: 1fr;
@@ -563,6 +886,28 @@
                 display: none;
             }
 
+            .section-1 .main-text-image {
+                max-width: 95%;
+            }
+
+            .brand-logo img {
+                height: 30px;
+            }
+
+            /* 모바일에서 오버레이 로고 크기 조정 */
+            .overlay-logo {
+                height: 50px; /* 모바일에서 더 작게 */
+            }
+
+            /* 모바일에서 메뉴와 겹치지 않도록 조정 */
+            .overlay-1 {
+                top: 60px; /* 모바일 메뉴 높이만큼 */
+            }
+
+            .overlay-2 {
+                top: calc(15% + 60px); /* 모바일 메뉴 높이 + 15% */
+            }
+
             .scroll-hint {
                 font-size: 14px;
                 bottom: 30px;
@@ -577,10 +922,10 @@
             }
 
             .hashtag {
-                font-size: 1.1rem;
-                padding: 10px 20px;
-                margin: 0 6px;
-                border-radius: 6px;
+                font-size: 1.65rem;
+                padding: 15px 30px;
+                margin: 0 9px;
+                border-radius: 9px;
             }
 
             .closing-text p {
@@ -590,6 +935,138 @@
 
             .hashtag-container {
                 padding: 40px 0;
+            }
+
+            /* 모바일에서 Vision 섹션 조정 */
+            .vision-text-overlay {
+                bottom: 20px;
+                left: 20px;
+            }
+
+            .vision-text-overlay h3 {
+                font-size: 2rem;
+            }
+
+            .vision-text-overlay .vision-description {
+                font-size: 1rem;
+                max-width: 400px;
+            }
+
+            /* 대형 화면에서 로고 크기 추가 조정 */
+        @media (min-width: 1400px) {
+            .logo-row img {
+                height: clamp(50px, 7vh, 70px);
+            }
+            
+            .logo-row {
+                gap: clamp(25px, 5vw, 60px);
+                margin-bottom: clamp(30px, 4vh, 50px);
+            }
+
+            .logo-row.top-row {
+                max-width: 1000px;
+            }
+
+            .logo-row.bottom-row {
+                max-width: 1200px;
+            }
+            
+            .partners-message {
+                font-size: clamp(1.1rem, 3vw, 1.4rem);
+            }
+        }
+
+        /* 태블릿에서 로고 크기 조정 */
+        @media (min-width: 769px) and (max-width: 1399px) {
+            .logo-row img {
+                height: clamp(45px, 6vh, 55px);
+            }
+            
+            .logo-row {
+                gap: clamp(20px, 4vw, 40px);
+            }
+
+            .logo-row.top-row {
+                max-width: 700px;
+            }
+
+            .logo-row.bottom-row {
+                max-width: 900px;
+            }
+        }
+
+        /* 모바일에서 새로운 섹션들 조정 */
+        @media (max-width: 768px) {
+            .video-content {
+                width: 95%;
+            }
+
+
+
+            .cards-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .cards-header h2 {
+                font-size: 1.8rem;
+                margin-bottom: 40px;
+            }
+
+            .info-card {
+                height: 200px;
+                padding: 30px 20px;
+            }
+
+            .info-card h3 {
+                font-size: 1.1rem;
+            }
+
+            .logo-row {
+                flex-wrap: wrap;
+                gap: clamp(15px, 4vw, 30px);
+                justify-content: space-around;
+            }
+
+            .logo-row img {
+                height: clamp(25px, 4vh, 35px);
+            }
+
+            .logo-row {
+                gap: clamp(10px, 3vw, 20px);
+                flex-wrap: wrap;
+            }
+
+            .logo-row.top-row, .logo-row.bottom-row {
+                max-width: 100%;
+                justify-content: space-around;
+            }
+
+            .partners-logos {
+                margin-top: clamp(40px, 10vh, 80px);
+                min-height: 35vh;
+            }
+
+            .partners-message {
+                margin: clamp(40px, 8vh, 60px) 0 clamp(30px, 6vh, 50px);
+                font-size: clamp(0.85rem, 3.5vw, 1rem);
+                padding: 0 20px;
+                margin-top: auto;
+            }
+
+            .partners-content {
+                min-height: 85vh;
+                padding-top: clamp(10px, 2vh, 20px);
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+                text-align: center;
+            }
+
+            .footer-right {
+                text-align: center;
             }
         }
 
@@ -631,7 +1108,9 @@
         </aside>
 
         <!-- 브랜드 로고 -->
-        <div class="brand-logo">MICE★STAR</div>
+        <div class="brand-logo" onclick="location.href='/'">
+            <img src="/static/images/logo.png" alt="MICE STAR" />
+        </div>
 
         <!-- 상단 네비게이션 -->
         <nav class="nav-bar">
@@ -652,6 +1131,9 @@
             <div class="scroll-dot" data-section="4"></div>
             <div class="scroll-dot" data-section="5"></div>
             <div class="scroll-dot" data-section="6"></div>
+            <div class="scroll-dot" data-section="7"></div>
+            <div class="scroll-dot" data-section="8"></div>
+            <div class="scroll-dot" data-section="9"></div>
         </div>
 
         <!-- 메인 컨텐츠 -->
@@ -659,7 +1141,7 @@
             <!-- 섹션 1: 인트로 -->
             <section class="section section-1">
                 <div class="content">
-                    <h1>A NEW STANDARD<br>THAT REFLECTS<br>THE POSSIBILITY<br>OF MICE TOURISM</h1>
+                    <img src="/static/images/long text.png" alt="A NEW STANDARD THAT REFLECTS THE POSSIBILITY OF MICE TOURISM" class="main-text-image" />
                 </div>
                 <div class="highlight">M</div>
                 <div class="scroll-hint">아래로 내려보세요</div>
@@ -667,6 +1149,17 @@
 
             <!-- 섹션 2: MICE STAR 로고 -->
             <section class="section section-2">
+                <!-- 오버레이 로고들 -->
+                <div class="overlay-logos">
+                    <img src="/static/images/sub logo overlay 1.png" alt="" class="overlay-logo overlay-1" />
+                    <img src="/static/images/sub logo overlay 2.png" alt="" class="overlay-logo overlay-2" />
+                    <img src="/static/images/sub logo overlay 3.png" alt="" class="overlay-logo overlay-3" />
+                    <img src="/static/images/sub logo overlay 4.png" alt="" class="overlay-logo overlay-4" />
+                    <img src="/static/images/sub logo overlay 5.png" alt="" class="overlay-logo overlay-5" />
+                    <img src="/static/images/sub logo overlay 6.png" alt="" class="overlay-logo overlay-6" />
+                    <img src="/static/images/sub logo overlay 7.png" alt="" class="overlay-logo overlay-7" />
+                </div>
+                
                 <div class="content">
                     <div class="mice-logo">
                         <img src="/static/images/mice-star-logo.png" alt="MICE STAR" />
@@ -689,23 +1182,15 @@
             <!-- 섹션 4: VISION -->
             <section class="section section-4">
                 <div class="vision-content">
-                    <div class="vision-text">
-                        <h3>VISION</h3>
-                        <div class="vision-description">
-                            문화의 MICE 정립을 선명하게 비추고,<br>
-                            도시와 사람이 지속스럽게 이어지는 지속가능한 도시 관광의 미래를 열다.
+                    <div class="vision-image-container">
+                        <img src="/static/images/vision.png" alt="VISION" />
+                        <div class="vision-text-overlay">
+                            <h3>VISION</h3>
+                            <div class="vision-description">
+                                문화의 MICE 정립을 선명하게 비추고,<br>
+                                도시와 사람이 지속스럽게 이어지는 지속가능한 도시 관광의 미래를 열다.
+                            </div>
                         </div>
-                    </div>
-                    <div class="vision-image">
-                        <div class="data-points">
-                            <div class="data-point" style="top: 20%; left: 15%;"></div>
-                            <div class="data-point" style="top: 30%; left: 45%;"></div>
-                            <div class="data-point" style="top: 50%; left: 25%;"></div>
-                            <div class="data-point" style="top: 60%; left: 70%;"></div>
-                            <div class="data-point" style="top: 80%; left: 40%;"></div>
-                            <div class="data-point" style="top: 25%; left: 80%;"></div>
-                        </div>
-                        <div class="hand-illustration">👆</div>
                     </div>
                 </div>
             </section>
@@ -753,128 +1238,102 @@
             <section class="section section-7">
                 <div class="hashtag-container">
                     <div class="hashtag-row">
-                        <div class="hashtag-scroll hashtag-row-1">
-                            <span class="hashtag">#관광</span>
-                            <span class="hashtag">#MICE</span>
-                            <span class="hashtag">#회의</span>
-                            <span class="hashtag orange">#재발견</span>
-                            <span class="hashtag">#전시</span>
-                            <span class="hashtag">#축제</span>
-                            <span class="hashtag">#체류</span>
-                            <span class="hashtag">#이벤트</span>
-                            <span class="hashtag">#연결</span>
-                            <span class="hashtag">#확장</span>
-                            <span class="hashtag">#브랜딩</span>
-                            <span class="hashtag blue">#지속가능성</span>
-                            <span class="hashtag">#가능성</span>
-                            <span class="hashtag">#전략</span>
-                            <span class="hashtag">#혁신</span>
-                            <span class="hashtag">#네트워크</span>
-                            <span class="hashtag orange">#글로컬</span>
-                            <span class="hashtag">#경험</span>
-                            <span class="hashtag">#관광</span>
-                            <span class="hashtag">#MICE</span>
-                            <span class="hashtag">#회의</span>
-                            <span class="hashtag orange">#재발견</span>
-                            <span class="hashtag">#전시</span>
-                            <span class="hashtag">#축제</span>
-                            <span class="hashtag">#체류</span>
-                            <span class="hashtag">#이벤트</span>
-                            <span class="hashtag">#연결</span>
-                            <span class="hashtag">#확장</span>
-                            <span class="hashtag">#브랜딩</span>
-                            <span class="hashtag blue">#지속가능성</span>
-                            <span class="hashtag">#가능성</span>
-                            <span class="hashtag">#전략</span>
-                            <span class="hashtag">#혁신</span>
-                            <span class="hashtag">#네트워크</span>
-                            <span class="hashtag orange">#글로컬</span>
-                            <span class="hashtag">#경험</span>
-                        </div>
+                        <div class="hashtag-scroll hashtag-row-1" data-direction="left"></div>
                     </div>
                     <div class="hashtag-row">
-                        <div class="hashtag-scroll hashtag-row-2">
-                            <span class="hashtag">#축제</span>
-                            <span class="hashtag">#체류</span>
-                            <span class="hashtag">#이벤트</span>
-                            <span class="hashtag">#연결</span>
-                            <span class="hashtag">#확장</span>
-                            <span class="hashtag">#브랜딩</span>
-                            <span class="hashtag blue">#지속가능성</span>
-                            <span class="hashtag">#가능성</span>
-                            <span class="hashtag">#관광</span>
-                            <span class="hashtag">#MICE</span>
-                            <span class="hashtag">#회의</span>
-                            <span class="hashtag orange">#재발견</span>
-                            <span class="hashtag">#전시</span>
-                            <span class="hashtag">#전략</span>
-                            <span class="hashtag">#혁신</span>
-                            <span class="hashtag orange">#글로컬</span>
-                            <span class="hashtag">#경험</span>
-                            <span class="hashtag">#네트워크</span>
-                            <span class="hashtag">#축제</span>
-                            <span class="hashtag">#체류</span>
-                            <span class="hashtag">#이벤트</span>
-                            <span class="hashtag">#연결</span>
-                            <span class="hashtag">#확장</span>
-                            <span class="hashtag">#브랜딩</span>
-                            <span class="hashtag blue">#지속가능성</span>
-                            <span class="hashtag">#가능성</span>
-                            <span class="hashtag">#관광</span>
-                            <span class="hashtag">#MICE</span>
-                            <span class="hashtag">#회의</span>
-                            <span class="hashtag orange">#재발견</span>
-                            <span class="hashtag">#전시</span>
-                            <span class="hashtag">#전략</span>
-                            <span class="hashtag">#혁신</span>
-                            <span class="hashtag orange">#글로컬</span>
-                            <span class="hashtag">#경험</span>
-                            <span class="hashtag">#네트워크</span>
-                        </div>
+                        <div class="hashtag-scroll hashtag-row-2" data-direction="right"></div>
                     </div>
                     <div class="hashtag-row">
-                        <div class="hashtag-scroll hashtag-row-3">
-                            <span class="hashtag">#브랜딩</span>
-                            <span class="hashtag blue">#지속가능성</span>
-                            <span class="hashtag">#전략</span>
-                            <span class="hashtag">#확대</span>
-                            <span class="hashtag">#네트워크</span>
-                            <span class="hashtag orange">#글로컬</span>
-                            <span class="hashtag">#혁신</span>
-                            <span class="hashtag">#경험</span>
-                            <span class="hashtag">#관광</span>
-                            <span class="hashtag">#MICE</span>
-                            <span class="hashtag">#회의</span>
-                            <span class="hashtag">#전시</span>
-                            <span class="hashtag">#축제</span>
-                            <span class="hashtag">#체류</span>
-                            <span class="hashtag">#이벤트</span>
-                            <span class="hashtag orange">#재발견</span>
-                            <span class="hashtag">#연결</span>
-                            <span class="hashtag">#확장</span>
-                            <span class="hashtag">#브랜딩</span>
-                            <span class="hashtag blue">#지속가능성</span>
-                            <span class="hashtag">#전략</span>
-                            <span class="hashtag">#확대</span>
-                            <span class="hashtag">#네트워크</span>
-                            <span class="hashtag orange">#글로컬</span>
-                            <span class="hashtag">#혁신</span>
-                            <span class="hashtag">#경험</span>
-                            <span class="hashtag">#관광</span>
-                            <span class="hashtag">#MICE</span>
-                            <span class="hashtag">#회의</span>
-                            <span class="hashtag">#전시</span>
-                            <span class="hashtag">#축제</span>
-                            <span class="hashtag">#체류</span>
-                            <span class="hashtag">#이벤트</span>
-                            <span class="hashtag orange">#재발견</span>
-                            <span class="hashtag">#연결</span>
-                            <span class="hashtag">#확장</span>
-                        </div>
+                        <div class="hashtag-scroll hashtag-row-3" data-direction="left"></div>
                     </div>
                 </div>
                 <div class="closing-text">
                     <p>도시의 이야기를 전략으로 설계하고, 경험으로 연결하는 순간<br>그 출발점에 MICE STAR가 있습니다.</p>
+                </div>
+            </section>
+
+            <!-- 섹션 8: 유튜브 동영상 -->
+            <section class="section section-8">
+                <div class="video-content">
+                                    <div class="video-container" id="video-container">
+                    <iframe 
+                        id="youtube-iframe"
+                        src="https://www.youtube.com/embed/iRqGkOL3bGU?enablejsapi=1"
+                        title="YouTube video"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen>
+                    </iframe>
+                </div>
+                </div>
+            </section>
+
+            <!-- 섹션 9: 카드 박스들 -->
+            <section class="section section-9">
+                <div class="cards-content">
+                    <div class="cards-header">
+                        <h2>수원의 Town MICE를 위해 달려온<br>MICE STAR의 모든 기록</h2>
+                    </div>
+                    <div class="cards-grid">
+                        <div class="info-card card-1">
+                            <h3>MICE STAR는<br>어떤 브랜드일까요?</h3>
+                            <button class="card-button">브랜드 보기</button>
+                        </div>
+                        <div class="info-card card-2">
+                            <h3>도시를 새롭게 보는<br>세 가지 지도</h3>
+                            <button class="card-button">프로젝트 보기</button>
+                        </div>
+                        <div class="info-card card-3">
+                            <h3>우리의 기록을<br>책으로 엮었습니다.</h3>
+                            <button class="card-button">책자 읽어보기</button>
+                        </div>
+                        <div class="info-card card-4">
+                            <h3>한국동에서의<br>순간을 담았습니다.</h3>
+                            <button class="card-button">기록 보기</button>
+                        </div>
+                        <div class="info-card card-5">
+                            <h3>사진은<br>여기 모았습니다.</h3>
+                            <button class="card-button">아카이브 열기</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 섹션 10: 협력 회사 로고들 -->
+            <section class="section section-10">
+                <div class="partners-content">
+                    <div class="partners-logos">
+                                            <div class="logo-row top-row">
+                        <img src="/static/images/w logo 1.png" alt="Partner 1" />
+                        <img src="/static/images/w logo 2.png" alt="Partner 2" />
+                        <img src="/static/images/w logo 3.png" alt="Partner 3" />
+                        <img src="/static/images/w logo 4.png" alt="Partner 4" />
+                    </div>
+                    <div class="logo-row bottom-row">
+                        <img src="/static/images/w logo 5.png" alt="Partner 5" />
+                        <img src="/static/images/w logo 6.png" alt="Partner 6" />
+                        <img src="/static/images/w logo 7.png" alt="Partner 7" />
+                        <img src="/static/images/w logo 8.png" alt="Partner 8" />
+                        <img src="/static/images/w logo 9.png" alt="Partner 9" />
+                    </div>
+                    </div>
+                    <div class="partners-message">
+                        <p>MICE STAR의 여정은<br>많은 기관의 협력이 있었기에 가능했습니다.</p>
+                    </div>
+                    <div class="footer-content">
+                        <div class="footer-left">
+                            <div class="footer-logo">MICE★STAR</div>
+                            <div class="footer-info">
+                                <p>개인정보처리방침 | 이용약관</p>
+                                <p>Copyright © MICE STAR All Right Reserved</p>
+                            </div>
+                        </div>
+                        <div class="footer-right">
+                            <p>문의사항이 있으신가요?</p>
+                            <p class="contact-email">eunyo996@khu.ac.kr</p>
+                            <p class="disclaimer">이메일 접수 후 순차적으로 회신됩니다.</p>
+                        </div>
+                    </div>
                 </div>
             </section>
         </div>
@@ -882,21 +1341,83 @@
 
     <script>
 
-        // 스크롤 인디케이터 기능
-        const mainContent = document.getElementById('main-content');
-        const scrollDots = document.querySelectorAll('.scroll-dot');
-        const sections = document.querySelectorAll('.section');
+        // DOM이 완전히 로드된 후 실행
+        document.addEventListener('DOMContentLoaded', function() {
+            // 스크롤 인디케이터 기능
+            const mainContent = document.getElementById('main-content');
+            const scrollDots = document.querySelectorAll('.scroll-dot');
+            const sections = document.querySelectorAll('.section');
+            
+            console.log(`총 섹션 수: ${sections.length}`); // 디버깅용
 
-        // 스크롤 위치에 따른 인디케이터 업데이트
-        mainContent.addEventListener('scroll', () => {
-            const scrollTop = mainContent.scrollTop;
-            const sectionHeight = window.innerHeight;
-            const currentSection = Math.round(scrollTop / sectionHeight);
+            // 자동 섹션 스냅 기능 (스크롤 완료 후 가장 가까운 섹션으로 이동)
+            const youtubeIframe = document.getElementById('youtube-iframe');
+            let scrollSnapTimeout;
+            let lastScrollTime = 0;
+            
+            // 스크롤 완료 후 가장 가까운 섹션으로 스냅
+            function snapToNearestSection() {
+                const currentScroll = mainContent.scrollTop;
+                const sectionHeight = window.innerHeight;
+                const nearestSection = Math.round(currentScroll / sectionHeight);
+                const targetScrollTop = nearestSection * sectionHeight;
+                
+                // 현재 위치와 목표 위치가 다르면 스냅
+                if (Math.abs(currentScroll - targetScrollTop) > 50) {
+                    console.log(`스크롤 스냅: 섹션 ${nearestSection}으로 이동`);
+                    
+                    // 동영상이 재생 중이라면 중지
+                    if (youtubeIframe) {
+                        try {
+                            youtubeIframe.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
+                            console.log('자동 스냅 시 동영상 중지');
+                        } catch (error) {
+                            console.log('동영상 중지 실패:', error);
+                        }
+                    }
+                    
+                    // 부드러운 스냅
+                    mainContent.scrollTo({
+                        top: targetScrollTop,
+                        behavior: 'smooth'
+                    });
+                }
+            }
+            
+            // 메인 컨테이너 스크롤 이벤트에 스냅 기능 추가
+            mainContent.addEventListener('scroll', () => {
+                const now = Date.now();
+                lastScrollTime = now;
+                
+                // 기존 스크롤 인디케이터 업데이트
+                const scrollTop = mainContent.scrollTop;
+                const sectionHeight = window.innerHeight;
+                const currentSection = Math.floor((scrollTop + sectionHeight * 0.5) / sectionHeight);
 
-            scrollDots.forEach((dot, index) => {
-                dot.classList.toggle('active', index === currentSection);
+                scrollDots.forEach((dot, index) => {
+                    dot.classList.toggle('active', index === currentSection);
+                });
+                
+                // 스크롤 완료 감지 (500ms 후 스냅 실행)
+                clearTimeout(scrollSnapTimeout);
+                scrollSnapTimeout = setTimeout(() => {
+                    // 최근 500ms 동안 스크롤이 없었다면 스냅 실행
+                    if (Date.now() - lastScrollTime >= 500) {
+                        snapToNearestSection();
+                    }
+                }, 500);
             });
-        });
+            
+            // 외부 스크롤 영역에서 휠 이벤트 감지
+            document.addEventListener('wheel', (e) => {
+                // iframe이 아닌 영역에서만 처리
+                if (!e.target.closest('#video-container')) {
+                    // 기존 메인 휠 이벤트가 처리하도록 함
+                    console.log('외부 영역에서 휠 스크롤 감지');
+                }
+            });
+
+        // 스크롤 인디케이터 업데이트는 위의 메인 스크롤 이벤트에서 처리됨
 
         // 인디케이터 클릭으로 섹션 이동
         scrollDots.forEach((dot, index) => {
@@ -906,50 +1427,215 @@
             });
         });
 
-        // 마우스 휠로 섹션별 스크롤
-        let isScrolling = false;
-        mainContent.addEventListener('wheel', (e) => {
-            if (isScrolling) return;
+            // 마우스 휠로 부드러운 섹션별 스크롤 (1틱 = 1섹션)
+            let isScrolling = false;
             
-            e.preventDefault();
-            isScrolling = true;
-            
-            const currentScroll = mainContent.scrollTop;
-            const sectionHeight = window.innerHeight;
-            const currentSection = Math.round(currentScroll / sectionHeight);
-            
-            let targetSection;
-            if (e.deltaY > 0) {
-                // 아래로 스크롤
-                targetSection = Math.min(currentSection + 1, sections.length - 1);
-            } else {
-                // 위로 스크롤
-                targetSection = Math.max(currentSection - 1, 0);
-            }
-            
-            sections[targetSection].scrollIntoView({ behavior: 'smooth' });
-            
-            setTimeout(() => {
-                isScrolling = false;
-            }, 1000);
-        });
+            mainContent.addEventListener('wheel', (e) => {
+                if (isScrolling) return;
+                
+                e.preventDefault();
+                isScrolling = true;
+                
+                const currentScroll = mainContent.scrollTop;
+                const sectionHeight = window.innerHeight;
+                // 더 정확한 섹션 감지
+                const currentSection = Math.floor((currentScroll + sectionHeight * 0.5) / sectionHeight);
+                
+                console.log(`현재 스크롤: ${currentScroll}, 섹션 높이: ${sectionHeight}, 현재 섹션: ${currentSection}, 총 섹션: ${sections.length}`); // 디버깅
+                
+                let targetSection;
+                if (e.deltaY > 0) {
+                    // 아래로 스크롤
+                    targetSection = Math.min(currentSection + 1, sections.length - 1);
+                } else {
+                    // 위로 스크롤
+                    targetSection = Math.max(currentSection - 1, 0);
+                }
+                
+                console.log(`목표 섹션: ${targetSection}`); // 디버깅
+                
+                // 부드러운 이동 (속도 70%)
+                if (sections[targetSection]) {
+                    sections[targetSection].scrollIntoView({ 
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+                
+                // 빠른 반응성을 위한 짧은 대기 시간
+                setTimeout(() => {
+                    isScrolling = false;
+                }, 250);
+            });
 
-        // 키보드 네비게이션
-        document.addEventListener('keydown', (e) => {
-            const currentScroll = mainContent.scrollTop;
-            const sectionHeight = window.innerHeight;
-            const currentSection = Math.round(currentScroll / sectionHeight);
-            
-            if (e.key === 'ArrowDown' || e.key === ' ') {
-                e.preventDefault();
-                const targetSection = Math.min(currentSection + 1, sections.length - 1);
-                sections[targetSection].scrollIntoView({ behavior: 'smooth' });
-            } else if (e.key === 'ArrowUp') {
-                e.preventDefault();
-                const targetSection = Math.max(currentSection - 1, 0);
-                sections[targetSection].scrollIntoView({ behavior: 'smooth' });
+            // 키보드 네비게이션
+            document.addEventListener('keydown', (e) => {
+                const currentScroll = mainContent.scrollTop;
+                const sectionHeight = window.innerHeight;
+                // 더 정확한 섹션 감지
+                const currentSection = Math.floor((currentScroll + sectionHeight * 0.5) / sectionHeight);
+                
+                if (e.key === 'ArrowDown' || e.key === ' ') {
+                    e.preventDefault();
+                    const targetSection = Math.min(currentSection + 1, sections.length - 1);
+                    if (sections[targetSection]) {
+                        sections[targetSection].scrollIntoView({ behavior: 'smooth' });
+                    }
+                } else if (e.key === 'ArrowUp') {
+                    e.preventDefault();
+                    const targetSection = Math.max(currentSection - 1, 0);
+                    if (sections[targetSection]) {
+                        sections[targetSection].scrollIntoView({ behavior: 'smooth' });
+                    }
+                }
+            });
+
+        // 동적 해시태그 무한 스크롤 시스템
+        class DynamicHashtagScroll {
+            constructor() {
+                this.hashtags = [
+                    { text: '#관광', type: 'normal' },
+                    { text: '#MICE', type: 'normal' },
+                    { text: '#회의', type: 'normal' },
+                    { text: '#재발견', type: 'orange' },
+                    { text: '#전시', type: 'normal' },
+                    { text: '#축제', type: 'normal' },
+                    { text: '#체류', type: 'normal' },
+                    { text: '#이벤트', type: 'normal' },
+                    { text: '#연결', type: 'normal' },
+                    { text: '#확장', type: 'normal' },
+                    { text: '#브랜딩', type: 'normal' },
+                    { text: '#지속가능성', type: 'blue' },
+                    { text: '#가능성', type: 'normal' },
+                    { text: '#전략', type: 'normal' },
+                    { text: '#혁신', type: 'normal' },
+                    { text: '#네트워크', type: 'normal' },
+                    { text: '#글로컬', type: 'orange' },
+                    { text: '#경험', type: 'normal' },
+                    { text: '#문화', type: 'normal' },
+                    { text: '#산업', type: 'normal' },
+                    { text: '#디지털', type: 'normal' },
+                    { text: '#미래', type: 'blue' },
+                    { text: '#협력', type: 'normal' },
+                    { text: '#성장', type: 'orange' }
+                ];
+                
+                this.rows = [];
+                this.animationIntervals = [];
+                this.init();
             }
-        });
+
+            init() {
+                const containers = document.querySelectorAll('.hashtag-scroll');
+                
+                containers.forEach((container, index) => {
+                    const direction = container.dataset.direction;
+                    const rowClass = container.classList.contains('hashtag-row-1') ? 1 : 
+                                   container.classList.contains('hashtag-row-2') ? 2 : 3;
+                    
+                    // 각 행의 원형 리스트 설정
+                    const rowData = {
+                        container: container,
+                        direction: direction,
+                        rowIndex: index,
+                        hashtagPool: this.createCircularPool(20), // 20개 원형 풀
+                        currentIndex: 0
+                    };
+                    
+                    this.rows.push(rowData);
+                    
+                    // 초기 해시태그들로 화면 채우기
+                    this.populateInitialHashtags(rowData);
+                    
+                    // CSS 애니메이션 활성화
+                    container.classList.add(`hashtag-row-${rowClass}`);
+                    
+                    // 주기적으로 해시태그 업데이트 (애니메이션 지속시간에 맞춰)
+                    const updateInterval = setInterval(() => {
+                        this.updateHashtags(rowData);
+                    }, 30000); // 45초마다 업데이트 (90초 애니메이션의 절반)
+                    
+                    this.animationIntervals.push(updateInterval);
+                });
+            }
+
+            createCircularPool(size) {
+                const pool = [];
+                for (let i = 0; i < size; i++) {
+                    const randomHashtag = this.hashtags[Math.floor(Math.random() * this.hashtags.length)];
+                    pool.push({ ...randomHashtag });
+                }
+                return pool;
+            }
+
+            populateInitialHashtags(rowData) {
+                const { container, hashtagPool } = rowData;
+                
+                // 완전한 무한 루프를 위해 해시태그를 2번 반복 생성
+                const repeatCount = 2; // 2번 반복으로 seamless loop
+                for (let repeat = 0; repeat < repeatCount; repeat++) {
+                    for (let i = 0; i < hashtagPool.length; i++) {
+                        const hashtagData = hashtagPool[i];
+                        const span = this.createHashtagElement(hashtagData);
+                        container.appendChild(span);
+                    }
+                }
+            }
+
+            createHashtagElement(hashtagData) {
+                const span = document.createElement('span');
+                span.className = `hashtag ${hashtagData.type}`;
+                span.textContent = hashtagData.text;
+                return span;
+            }
+
+            updateHashtags(rowData) {
+                const { container, hashtagPool } = rowData;
+                const children = Array.from(container.children);
+                
+                // 랜덤하게 몇 개의 해시태그를 새로운 것으로 교체
+                const updateCount = Math.floor(Math.random() * 5) + 3; // 3-7개 업데이트
+                
+                for (let i = 0; i < updateCount && i < children.length; i++) {
+                    const randomIndex = Math.floor(Math.random() * children.length);
+                    const targetElement = children[randomIndex];
+                    
+                    if (targetElement) {
+                        // 새로운 해시태그로 교체
+                        const newHashtag = this.hashtags[Math.floor(Math.random() * this.hashtags.length)];
+                        targetElement.textContent = newHashtag.text;
+                        targetElement.className = `hashtag ${newHashtag.type}`;
+                    }
+                }
+            }
+
+            destroy() {
+                // 정리 작업
+                this.animationIntervals.forEach(interval => clearInterval(interval));
+                this.animationIntervals = [];
+            }
+        }
+
+        // 해시태그 섹션에 도달했을 때 시작
+        let dynamicHashtagScroll = null;
+        const hashtagSection = document.querySelector('.section-7');
+        
+        const hashtagObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !dynamicHashtagScroll) {
+                    dynamicHashtagScroll = new DynamicHashtagScroll();
+                } else if (!entry.isIntersecting && dynamicHashtagScroll) {
+                    // 섹션을 벗어나면 정리 (선택사항)
+                    // dynamicHashtagScroll.destroy();
+                    // dynamicHashtagScroll = null;
+                }
+            });
+        }, { threshold: 0.1 });
+
+        if (hashtagSection) {
+            hashtagObserver.observe(hashtagSection);
+        }
+        }); // DOMContentLoaded 이벤트 리스너 닫기
     </script>
 </body>
 </html> 
