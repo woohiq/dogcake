@@ -1,0 +1,412 @@
+@import url('../common/header.css');
+@import url('../common/footer.css');
+@import url('./animation.css');
+@import url('./base.css');
+@import url('./layout.css');
+
+
+body, h1, h2, h3, h4, h5, h6,
+button,input,
+select{
+    font-family: 'Pretendard', sans-serif;
+}
+
+.intro-toast {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 10vh;
+    z-index: 3000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.6s ease;
+}
+
+.toast-frame {
+    width: min(90vw, 360px); /* 최대 700px, 화면 줄면 자동 축소 */
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+}
+
+.intro-toast.show {
+    opacity: 1;
+    pointer-events: none;
+}
+
+.toast-box {
+    background: rgba(60, 60, 60, 0.92);
+    color: white;
+    padding: 3vh 4vw;
+    border-radius: 1rem;
+    text-align: center;
+    width: 100%;
+    box-sizing: border-box;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+    pointer-events: auto;
+    max-width: 700px;
+}
+
+.toast-box strong {
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    font-weight: 700;
+    margin-top: 1vh;
+    display: block;
+}
+
+.toast-box small {
+    display: block;
+    margin-top: 2vh;
+    font-size: clamp(0.75rem, 1.2vw, 1rem);
+    opacity: 0.8;
+}
+
+#countdown {
+    font-weight: 700;
+    color: #ffcc66;
+    font-size: clamp(0.9rem, 1.5vw, 1.2rem);
+}
+
+
+@media (max-width: 600px) {
+    .toast-box {
+        padding: 2vh 6vw;
+        font-size: 14px;
+    }
+    .toast-box strong {
+        font-size: 16px;
+    }
+}
+
+/***************************/
+.dadak-section {
+    width: 100%;
+    background-color: #FFFF99;
+    display: flex;
+    justify-content: center;
+    padding: 40px 0;
+
+}
+
+.dadak-container {
+    position: relative;
+    width: min(90%, 1200px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+/*상단 로고*/
+.dadak-title{
+    width: 100%;
+    text-align: left;
+    margin-bottom: 20px;
+
+}
+
+.dadakLogo{
+    width: 350px;
+    display: block;
+    margin-left: -55px;
+    margin-top: 60px;
+}
+
+
+/*지도 및 패널*/
+.map-content-wrapper{
+    position: relative;
+    width: 1000px;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 40px;
+}
+
+.daDakmap{
+    width: 100%;
+    border-radius: 12px;
+}
+
+.left-panels, .right-panels{
+    position: absolute;
+    top: 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    pointer-events: none;
+}
+
+.left-panels{
+    /*left: -185px;*/
+    left:-18.5%;
+}
+
+.right-panels{
+    /*right: 105px;*/
+    right: 10.5%;
+}
+
+
+.left-panels img,
+.right-panels img{
+    width: 220px;
+    opacity: 0.9;
+    pointer-events: auto;
+    cursor:pointer;
+}
+
+
+.num-17{
+    position: absolute;
+    top:6%;
+    left:20px;
+}
+
+.num-24{
+    position: absolute;
+    top:13.5%;
+}
+
+.num-11{
+    position: absolute;
+    top:22%;
+}
+
+.num-82{
+    position: absolute;
+    top:30%;
+}
+
+.num-39{
+    position: absolute;
+    top:39%;
+}
+
+.num-84{
+    position: absolute;
+    top:47%;
+}
+
+.num-16{
+    position: absolute;
+    top:55%;
+}
+.num-04{
+    position: absolute;
+    top:63.5%;
+}
+
+/*오른쪽*/
+.num-36{
+    position: absolute;
+    top:-3%;
+}
+
+.num-38{
+    position: absolute;
+    top:20%;
+}
+.num-18{
+    position: absolute;
+    top:29%;
+}
+.num-13{
+    position: absolute;
+    top:37%;
+}
+
+.num-1013{
+    position: absolute;
+    top:46%;
+}
+
+.num-83{
+    position: absolute;
+    top:55%;
+}
+
+.num-37{
+    position: absolute;
+    top:64%;
+}
+
+/*하단 low 영역*/
+.Map-low-content{
+    position: relative;
+    width: 100%;
+    top:-380px;
+    z-index: 5;
+}
+
+.map-grid{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    justify-content: center;
+    gap:15px;
+}
+
+.map-grid img{
+    width: 300px;
+}
+
+.low-frame{
+    margin-top: -350px;
+}
+
+.low-frame img{
+    max-width: 1250px;
+}
+
+
+
+/*반응 처리*/
+@media (max-width: 1200px) {
+    .dadak-container{
+        width: 95%;
+    }
+
+    .left-panels, .right-panels{
+        display: none;
+    }
+
+    .map-grid{
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .map-grid img{
+        width: 60px;
+    }
+}
+
+/*********************************/
+/* 팝업 전체 영역 */
+/* 팝업 전체 영역 */
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* 배경 어둡게 */
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+}
+
+/* 팝업 본체 */
+.popup-content {
+    position: relative;
+    width: 1300px;
+    height: 980px;
+    background-color: #F1C13A; /* 노란색 배경 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 16px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.25);
+    overflow: hidden;
+}
+
+/* 이미지 */
+.popup-body img {
+    width: auto;
+    height: auto;
+    max-width: 90%;
+    object-fit: contain;
+    border-radius: 8px;
+}
+
+.close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 36px;
+    height: 36px;
+
+    background: url('/images/dadak/popup_src/closebtn.png') no-repeat center center;
+    background-size: contain;
+    border: none;
+    cursor: pointer;
+    z-index: 1000;
+    opacity: 0.9;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.close:hover {
+    transform: scale(1.15);
+    opacity: 0.75;
+}
+
+#popup-39 .popup-content {
+    width: 1300px;
+    height: 1896px;
+}
+
+/* 팝업 안의 이미지 두 개를 세로로 정렬 */
+#popup-39 .popup-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px; /* 이미지 사이 여백 */
+}
+
+/* 이미지 크기 통일 */
+#popup-39 .popup-body img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+@media (max-width: 1000px) {
+    .popup-content {
+        width: 90%;
+        height: auto;
+    }
+
+    .popup-body img {
+        width: 100%;
+        height: auto;
+    }
+}
+
+/* 토스트 기본 스타일 */
+.toast {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(70, 70, 70, 0.95);
+    color: white;
+    padding: 60px 120px;
+    border-radius: 10px;
+
+    font-size: 16px;
+    text-align: center;
+
+    z-index: 2000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+}
+
+.toast strong{
+    display: block;
+    font-weight: 700;
+    font-size: 20px;
+}
+
+.toast.show {
+    opacity: 1;
+    pointer-events: auto;
+}

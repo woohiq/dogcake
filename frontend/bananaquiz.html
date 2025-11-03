@@ -998,6 +998,19 @@
 
         /* 모바일에서 새로운 섹션들 조정 */
         @media (max-width: 768px) {
+            /* 모바일에서 스크롤 스냅 완전 비활성화 */
+            body, html {
+                scroll-behavior: auto; /* 부드러운 스크롤 비활성화 */
+            }
+            
+            #main-content {
+                scroll-snap-type: none; /* 스크롤 스냅 비활성화 */
+                overflow-y: auto;
+            }
+            
+            .section {
+                scroll-snap-align: none; /* 개별 섹션 스냅 비활성화 */
+            }
             .video-content {
                 width: 95%;
             }
@@ -1457,7 +1470,31 @@
             window.addEventListener('resize', () => {
                 // 스크롤 스냅 타이머 초기화 (모바일 전환 시)
                 clearTimeout(scrollSnapTimeout);
+                
+                // 모바일로 전환 시 스크롤 잠금 해제
+                if (isMobile()) {
+                    isScrolling = false;
+                }
             });
+
+            // 모바일에서 터치 스크롤 이벤트 처리
+            let touchStartY = 0;
+            
+            mainContent.addEventListener('touchstart', (e) => {
+                if (isMobile()) {
+                    touchStartY = e.touches[0].clientY;
+                    // 터치 시작 시 스크롤 잠금 해제
+                    isScrolling = false;
+                    clearTimeout(scrollSnapTimeout);
+                }
+            }, { passive: true });
+            
+            mainContent.addEventListener('touchmove', (e) => {
+                if (isMobile()) {
+                    // 터치 이동 중에는 스크롤 스냅 방지
+                    clearTimeout(scrollSnapTimeout);
+                }
+            }, { passive: true });
 
         // 스크롤 인디케이터 업데이트는 위의 메인 스크롤 이벤트에서 처리됨
 
@@ -1469,10 +1506,16 @@
             });
         });
 
-            // 마우스 휠로 부드러운 섹션별 스크롤 (1틱 = 1섹션)
+            // 마우스 휠로 부드러운 섹션별 스크롤 (1틱 = 1섹션, 데스크톱만)
             let isScrolling = false;
             
             mainContent.addEventListener('wheel', (e) => {
+                // 모바일에서는 기본 스크롤 동작 허용
+                if (isMobile()) {
+                    console.log('모바일에서 기본 스크롤 동작');
+                    return; // preventDefault 하지 않고 기본 동작 허용
+                }
+                
                 if (isScrolling) return;
                 
                 e.preventDefault();
@@ -1510,8 +1553,13 @@
                 }, 250);
             });
 
-            // 키보드 네비게이션
+            // 키보드 네비게이션 (데스크톱만)
             document.addEventListener('keydown', (e) => {
+                // 모바일에서는 키보드 네비게이션 비활성화
+                if (isMobile()) {
+                    return;
+                }
+                
                 const currentScroll = mainContent.scrollTop;
                 const sectionHeight = window.innerHeight;
                 // 더 정확한 섹션 감지

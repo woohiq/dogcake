@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>MICE STAR</title>
+    <link rel="stylesheet" href="/CSS/style/dadak.css">
+</head>
+
+<body>
+<div class="web">
+    <div th:replace="~{fragments/header :: headerFragment}"></div>
+
+    <div th:replace="~{fragments/dadak_sections/introtoast :: introFragment}"></div>
+    <div th:replace="~{fragments/dadak_sections/dadakMaps :: daDakSection}"></div>
+    <div th:replace="~{fragments/dadak_sections/popup::popupFragment}"></div>
+
+
+    <div th:replace="~{fragments/footer :: footerFragment}"></div>
+
+    <script th:src="@{/js/popup_js/popup.js}"></script>
+    <script th:src="@{/js/popup_js/popup_toast.js}"></script>
+
+
+</div>
+</body>
+</html>

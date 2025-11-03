@@ -10,9 +10,16 @@ from datetime import datetime
 import google.generativeai as genai
 import os
 from dotenv import load_dotenv # local
-load_dotenv()
-app = FastAPI()
-print("현재 DATABASE_URL:", os.getenv("DATABASE_URL"))
+# load_dotenv()
+# app = FastAPI()
+# print("현재 DATABASE_URL:", os.getenv("DATABASE_URL"))
+
+# MICE-STAR 프로젝트의 정적 파일들을 먼저 마운트 (우선순위 높게)
+mice_star_static_path = "MICE-STAR-Project-main/src/main/resources/static"
+app.mount("/CSS", StaticFiles(directory=f"{mice_star_static_path}/CSS"), name="mice-css")
+app.mount("/js", StaticFiles(directory=f"{mice_star_static_path}/js"), name="mice-js")
+app.mount("/images", StaticFiles(directory=f"{mice_star_static_path}/images"), name="mice-images")
+app.mount("/pdf", StaticFiles(directory=f"{mice_star_static_path}/pdf"), name="mice-pdf")
 
 # 정적 파일 설정 (/static 경로로 css, js, 이미지 접근)
 app.mount("/static", StaticFiles(directory="static"), name="static")
@@ -27,10 +34,35 @@ async def serve_index():
 async def serve_applegame():
     return FileResponse("frontend/applegame.html")
 
-# bananaquiz.html 반환
+# bananaquiz.html 반환 - MICE-STAR 프로젝트 메인 페이지
 @app.get("/bananaquiz")
 async def serve_bananaquiz():
-    return FileResponse("frontend/bananaquiz.html")
+    return FileResponse("MICE-STAR-Project-main/pages/home.html")
+
+# MICE-STAR 브랜드 페이지
+@app.get("/brand")
+async def serve_brand():
+    return FileResponse("MICE-STAR-Project-main/pages/brand.html")
+
+# MICE-STAR 프로젝트 페이지
+@app.get("/project")
+async def serve_project():
+    return FileResponse("MICE-STAR-Project-main/pages/project.html")
+
+# MICE-STAR 출판물 페이지
+@app.get("/publications")
+async def serve_publications():
+    return FileResponse("MICE-STAR-Project-main/pages/publish.html")
+
+# MICE-STAR 다닥 페이지
+@app.get("/dadak")
+async def serve_dadak():
+    return FileResponse("MICE-STAR-Project-main/pages/dadak.html")
+
+# MICE-STAR 아카이브 페이지
+@app.get("/archive")
+async def serve_archive():
+    return FileResponse("MICE-STAR-Project-main/pages/archive.html")
 
 
 # CORS 설정

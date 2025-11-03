@@ -1,0 +1,50 @@
+<section th:fragment="townSection" class="town-section">
+
+    <div class="town_title-content">
+        <p class="town_description">
+            수원의 Town MICE를 위해 달려온<br>
+            MICE STAR의 모든 기록
+        </p>
+    </div>
+
+    <div class="town_card-content">
+
+        <div class="card-animation animate-slide image-card bg-1">
+            <div class="card_text-wrapper">
+                <p>MICE STAR는<br>어떤 브랜드일까요?</p>
+            </div>
+            <a th:href="@{/brand}" class="card_button">브랜드 보기</a>
+
+        </div>
+        <div class="card-animation animate-slide image-card bg-2">
+            <div class="card_text-wrapper">
+                <p>도시를 새롭게 보는<br>두 가지 지도</p>
+            </div>
+            <a th:href="@{/project}" class="card_button">프로젝트 보기</a>
+        </div>
+
+
+        <div class="card-animation animate-slide image-card bg-3">
+            <div class="card_text-wrapper">
+                <p>우리의 기록을<br>책으로 엮었습니다.</p>
+            </div>
+            <a th:href="@{/publications}" class="card_button">책자 읽어보기</a>
+        </div>
+
+
+        <div class="card-animation animate-slide image-card bg-4">
+                <div class="card_text-wrapper">
+                    <p>행궁동에서의<br>순간을 남겼습니다.</p>
+                </div>
+                <a th:href="@{/dadak}" class="card_button">기록 보기</a>
+        </div>
+
+
+        <div class="card-animation animate-slide image-card bg-5">
+                <div class="card_text-wrapper">
+                    <p>사진은<br>여기 모았습니다.</p>
+                </div>
+                <a th:href="@{/archive}" class="card_button">아카이브 열기</a>
+        </div>
+    </div>
+</section>

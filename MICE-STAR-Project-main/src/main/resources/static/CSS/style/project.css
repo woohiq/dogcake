@@ -1,0 +1,214 @@
+@import url('../common/header.css');
+@import url('../common/footer.css');
+@import url('./animation.css');
+@import url('./base.css');
+@import url('./layout.css');
+
+body, h1, h2, h3, h4, h5, h6,
+button, input,
+select {
+    font-family: 'Pretendard', sans-serif;
+}
+
+.mapselect-section{
+    background-color: #1a1a1a;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 50px;
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+
+.select-container{
+    display: flex;
+    gap:70px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.select-card{
+    width: 500px;
+    height: 500px;
+    border-radius: 30px;
+    padding: 30px;
+    box-sizing: border-box;
+    display: flex;
+
+    flex-direction: column;
+    justify-content: space-between;
+    text-decoration: none;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow:hidden;
+    position: relative;
+}
+
+.select-card:hover{
+    transform: translateY(-10px) scale(1);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+.select-card--white{
+    background-color: #2E53FF;
+}
+
+.select-card--black{
+    background-color: #F07E26;
+}
+
+.card-visual{
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-visual img{
+    width: 95%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.card-button{
+    position: absolute;
+    bottom: 50%;
+    left:50%;
+    transform: translate(-50%, 50%);
+
+    background-color: #fff;
+    color: #111;
+    padding: 15px 40px; /*버튼 내부 여백*/
+    border-radius: 50px;
+    white-space: nowrap;
+
+    font-size: 1.4rem;
+    font-weight: bold;
+    text-align: center;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+
+    transform:translate(-50%,calc(50% + 20px));
+}
+
+.select-card:hover .card-button{
+    opacity: 1;
+    transform: translate(-50%, 50%);
+}
+
+/*******************************************************/
+/*White Map*/
+/* 전체 레이아웃 설정 */
+body {
+    margin: 0;
+}
+
+.magnify-container {
+    display: flex; /* 좌우 패널을 나란히 배치 */
+    height: 100vh;
+    box-sizing: border-box;
+    padding: 15px;
+    background-color: #038cfc;
+}
+
+/* 좌측 원본 이미지 패널 */
+.source-panel {
+    flex: 1;
+    background-image: url('/images/project/white/project_arrow.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.source-panel img {
+    width: 60%;
+    height: auto;
+
+    object-fit: contain;
+}
+
+/* 우측 확대 이미지 패널 */
+.magnified-view {
+    flex: 1;
+    border: 1px solid #ccc;
+    background-color: #fff;
+
+    /* --- 확대 효과의 핵심 --- */
+    background-image: url('/images/project/white/map-white.png'); /* 원본과 같은 이미지 사용 */
+    background-repeat: no-repeat;
+    background-size: 150%;
+
+    /* 기본적으로 확대 이미지를 숨김 */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease, opacity0.2s linear;
+}
+
+/* ⭐ 핵심 로직: 좌측 패널에 마우스를 올리면, 우측 패널을 보여줌 */
+
+.magnified-view.visible{
+    visibility: visible;
+    opacity: 1;
+}
+
+
+/*******************************************************/
+/*Black Map*/
+.magnify2-container {
+    display: flex; /* 좌우 패널을 나란히 배치 */
+    height: 100vh;
+    box-sizing: border-box;
+    padding: 15px;
+    background-color: #F07E26;
+}
+
+/* 좌측 원본 이미지 패널 */
+.source2-panel {
+    flex: 1;
+    background-image: url('/images/project/black/project_arrow2.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.source2-panel img {
+    width: 60%;
+    height: auto;
+
+    object-fit: contain;
+}
+
+/* 우측 확대 이미지 패널 */
+.magnified2-view {
+    flex: 1;
+    border: 1px solid #ccc;
+    background-color: #fff;
+
+    /* --- 확대 효과의 핵심 --- */
+    background-image: url('/images/project/black/map-black.png'); /* 원본과 같은 이미지 사용 */
+    background-repeat: no-repeat;
+    background-size: 150%;
+
+    /* 기본적으로 확대 이미지를 숨김 */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease, opacity0.2s linear;
+}
+
+.magnified2-view.visible{
+    visibility: visible;
+    opacity: 1;
+}

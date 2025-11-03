@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>MICE STAR</title>
+    <link rel="stylesheet" href="/CSS/style/home.css">
+</head>
+
+<body>
+<!--<div class="scroll-container">-->
+    <div class="web">
+
+        <div th:replace="~{fragments/header :: headerFragment}"></div>
+
+        <div th:replace="~{fragments/home_sections/intro :: introSection}"></div>
+        <div th:replace="~{fragments/home_sections/dark :: darkSection}"></div>
+        <div th:replace="~{fragments/home_sections/onlyText :: onlyTextSection}"></div>
+        <div th:replace="~{fragments/home_sections/vision :: visionSection}"></div>
+        <div th:replace="~{fragments/home_sections/mission :: missionSection}"></div>
+        <div th:replace="~{fragments/home_sections/core :: coreSection}"></div>
+        <div th:replace="~{fragments/home_sections/tag :: tagSection}"></div>
+        <div th:replace="~{fragments/home_sections/live :: liveSection}"></div>
+        <div th:replace="~{fragments/home_sections/townMice :: townSection}"></div>
+        <div th:replace="~{fragments/home_sections/end :: endSection}"></div>
+
+
+        <script src="/js/home_js/script.js"></script>
+        <script src="/js/home_js/typingControl.js"></script>
+        <script src="/js/home_js/fade_in.js"></script>
+        <script src="/js/home_js/coreValue_ani.js"></script>
+        <script src="/js/home_js/tagAnimation.js"></script>
+        <script src="/js/home_js/town.js"></script>
+
+        <footer th:replace="~{fragments/footer :: footerFragment}"></footer>
+<!--    </div> &lt;!&ndash; scroll-container &ndash;&gt;-->
+</div>
+</body>
+</html>

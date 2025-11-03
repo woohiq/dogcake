@@ -1,0 +1,64 @@
+@keyframes slide-up {
+    from{
+        opacity: 0;
+        transform: translate(-50%, 50px);
+    }
+    to{
+        opacity: 1;
+        transform: translate(-50%, 0);
+    }
+}
+
+@keyframes fade-in-up {
+    from{
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to{
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/*Core value*/
+@keyframes core_fade_in{
+    from{
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to{
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* tag */
+/* 1. 왼쪽으로 흐르는 애니메이션 */
+@keyframes marquee-left {
+    from { transform: translateX(0%); }
+    to { transform: translateX(-50%); }
+}
+
+/* 2. 오른쪽으로 흐르는 애니메이션 */
+@keyframes marquee-right {
+    from { transform: translateX(-50%); }
+    to { transform: translateX(0%); }
+}
+
+
+/*Town MICE*/
+@keyframes town_slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px); /* 좀 더 역동적인 느낌을 위해 값을 살짝 키웠습니다 */
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes popupFade {
+    from { transform: scale(0.95); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}

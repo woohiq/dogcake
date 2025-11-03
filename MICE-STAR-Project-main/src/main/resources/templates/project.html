@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>MICE STAR</title>
+    <link rel="stylesheet" href="/CSS/style/project.css">
+</head>
+
+<body>
+    <div class="web">
+        <div th:replace="~{fragments/header :: headerFragment}"></div>
+
+        <div th:replace="~{fragments/project_sections/mapselect::MapSelectSection}"></div>
+
+        <div th:replace="~{fragments/footer :: footerFragment}"></div>
+</div>
+
+</body>
+</html>

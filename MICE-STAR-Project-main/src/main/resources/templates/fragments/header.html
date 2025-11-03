@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<body>
+<nav class="navbar" th:fragment="headerFragment">
+    <div class="navbar_content">
+        <div class="logo-small">
+            <a th:href="@{/}">
+                <img class="logo-default" th:src="@{/images/home/logo.png}" alt="MICE STAR 홈으로 이동">
+            </a>
+        </div>
+
+        <ul class="menu">
+            <li th:each="item : ${menuitems}">
+                <a th:href="${item.url}" th:text="${item.name}">메뉴 항목</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+</body>
+</html>

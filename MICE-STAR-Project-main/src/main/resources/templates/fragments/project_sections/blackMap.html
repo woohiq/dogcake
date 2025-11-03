@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Black Map</title>
+    <link rel="stylesheet" th:href="@{/CSS/style/project.css}">
+</head>
+<style>
+    body {
+        cursor: url("data:image/svg+xml;charset=utf-8,<svg width='32' height='32' viewBox='0 0 325 325' xmlns='http://www.w3.org/2000/svg'><path fill='rgb(42,93,252)' d='M0 0L130.5 0L161.5 31L162 0L293 0L293 32L324.5 32L325 32.5L325 163L294 163.5L325 194.5L325 325L194.5 325L163.5 294L163 325L32.5 325L32 324.5L32 293L0 293L0 162L31 161.5L0 130.5L0 0ZM33 33L33 292L292 292L292 33L33 33Z'/></svg>") 16 16, auto;
+    }
+</style>
+
+<body>
+<div class="magnify2-container">
+
+    <div th:replace="~{fragments/header :: headerFragment}"></div>
+
+
+    <div class="source2-panel">
+        <img th:src="@{/images/project/black/map-black.png}" alt="black map">
+    </div>
+
+    <div class="magnified2-view"></div>
+
+    <script th:src="@{/js/project_js/map2.js}"></script>
+</div>
+
+</body>
+</html>

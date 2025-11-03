@@ -1,0 +1,73 @@
+/* === HEADER STYLES === */
+body, h1, h2, h3, h4, h5, h6,
+button,input,
+select{
+    font-family: 'Pretendard', sans-serif;
+}
+
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    width: 100%;
+    min-height: 80px;
+
+    /* 내부 콘텐츠 중앙 정렬을 위한 Flexbox */
+    display: flex;
+    justify-content: center;
+
+    color: #ffffff;
+    background-image: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.5),
+        rgba(0, 0, 0, 0)
+    );
+}
+
+
+/* --- 헤더 내부 콘텐츠 (로고, 메뉴) --- */
+.navbar_content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 1400px;
+    padding: 0 40px;
+
+    min-width: 1200px;
+}
+
+.logo-small {
+    position: relative;
+    height: 24px;
+}
+
+.logo-small img {
+    position: absolute; /* 두 이미지를 겹치기 위함 */
+    top: 0;
+    left: 0;
+    height: 100%; /* 부모 높이에 맞춤 */
+    width: auto;
+    transition: opacity 0.4s ease;
+}
+
+
+/* --- 메뉴 --- */
+.menu {
+    display: flex;
+    gap: 3vw;
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+    flex-wrap: wrap;
+}
+
+.menu > li a {
+    font-size: 1.1rem;
+    /*font-weight: 500;*/
+    color: inherit;
+    text-decoration: none;
+    font-weight: bold;
+}
+

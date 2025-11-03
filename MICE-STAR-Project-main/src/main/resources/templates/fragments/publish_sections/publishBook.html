@@ -1,0 +1,16 @@
+<header th:fragment="PublishBookSection" class="book-section">
+    <div class="publish-container">
+        <img class="publish-logo-left" th:src="@{images/publish/leftLogo.png}" alt="왼쪽 로고">
+
+        <a th:href="@{/pdf/publish_pdf1.pdf}" target="_blank" class="book-link">
+            <img class="blue-book" th:src="@{images/publish/bluebook.png}" alt="왼쪽 파란색 책(pdf 열기)">
+        </a>
+
+        <a th:href="@{/pdf/publish_pdf2.pdf}" target="_blank" class="book-link">
+            <img class="orange-book" th:src="@{images/publish/brandbook.png}" alt="오른쪽 파란색 책(pdf 열기)">
+        </a>
+
+        <img class="publish-logo-right" th:src="@{images/publish/rightLogo.png}" alt="오른쪽 로고">
+
+    </div>
+</header>

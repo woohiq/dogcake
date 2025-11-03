@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>MICE STAR</title>
+    <link rel="stylesheet" href="/CSS/style/archive.css">
+</head>
+
+<body>
+<div class="web">
+
+    <div th:replace="~{fragments/header :: headerFragment}"></div>
+
+    <div th:replace="~{fragments/archive_sections/archiveGrid :: archivegrid}"></div>
+
+    <footer th:replace="~{fragments/footer :: footerFragment}"></footer>
+</div>
+
+</body>
+</html>

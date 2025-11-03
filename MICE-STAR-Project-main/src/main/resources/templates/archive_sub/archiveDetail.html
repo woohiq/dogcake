@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="'Archive ' + ${archiveId}"></title>
+    <link rel="stylesheet" href="/CSS/style/archiveSub.css">
+</head>
+
+<body>
+<div th:replace="~{fragments/header :: headerFragment}"></div>
+
+<div class="archive-page-wrapper">
+
+    <button class="nav-btn prev-btn">
+        <img th:src="@{/images/archive/leftarrow.png}" alt="왼쪽 화살표">
+    </button>
+
+    <div class="archive-frame-container"
+         th:style="|background-image: url('${frameImageUrl}');|"
+         th:data-archive-id="${archiveId}"
+         th:data-total-images="${totalImages}">
+
+        <img id="currentArchiveImage" src="" alt="Archive Image">
+
+        <div id="imageCounter" class="image-counter">
+            <span id="currentImageNum">1</span> / <span th:text="${totalImages}">10</span>
+        </div>
+    </div>
+
+    <button class="nav-btn next-btn">
+        <img th:src="@{/images/archive/rightarrow.png}" alt="오른쪽 화살표">
+    </button>
+
+    <button id="downloadButton">Download</button>
+</div>
+
+    <footer th:replace="~{fragments/footer :: footerFragment}"></footer>
+
+    <script th:src="@{/js/archive_js/archiveDetail.js}"></script>
+</body>
+</html>

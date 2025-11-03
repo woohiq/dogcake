@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>MICE STAR</title>
+    <link rel="stylesheet" href="/CSS/style/publish.css">
+</head>
+
+<body>
+    <div class="web">
+        <div th:replace="~{fragments/header :: headerFragment}"></div>
+
+        <div th:replace="~{fragments/publish_sections/publishBook::PublishBookSection}"></div>
+
+        <div th:replace="~{fragments/footer :: footerFragment}"></div>
+    </div>
+</body>
+</html>

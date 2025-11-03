@@ -1,0 +1,1121 @@
+@import url('../common/header.css');
+@import url('../common/footer.css');
+@import url('./animation.css');
+@import url('./base.css');
+@import url('./layout.css');
+
+
+/*box_image*/
+body {
+    margin: 0;
+    background-color: #000;
+    font-family: 'Pretendard', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6,
+button,input,
+select{
+    font-family: 'Pretendard', sans-serif;
+}
+
+.box-section {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+
+
+.box-container {
+    flex: 1;
+    display: flex;
+    padding: 0; /* 상하 여백은 0, 좌우 여백을 40px로 설정 */
+}
+
+
+.box {
+    flex: 1;
+    display: flex;
+    border-right: 1px solid rgba(255, 255, 255, 0.2);
+
+    position: relative;
+    overflow: hidden;
+}
+
+
+.box:last-child {
+    border-right: none;
+}
+
+
+.box-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    padding: 0 20px;
+    z-index: 2;
+
+    position: relative;
+}
+
+.box::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+
+.box:hover::before {
+    opacity: 1;
+}
+
+
+.box:nth-child(1)::before {
+    background-image: linear-gradient(to top, #1c2a4f 0%, rgba(0, 0, 0, 0) 100%);
+}
+
+.box:nth-child(2)::before {
+    background-image: linear-gradient(to top, #444444 0%, rgba(0, 0, 0, 0) 100%);
+}
+
+.box:nth-child(3)::before {
+    background-image: linear-gradient(to top, #4a2e1d 0%, rgba(0, 0, 0, 0) 100%);
+}
+
+.box img {
+    flex: 1;
+    width: 100%;
+    object-fit: contain;
+    overflow: hidden;
+}
+
+.box p {
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: bold;
+
+    padding-top: 10px;
+    padding-bottom: 70px;
+}
+
+
+/**************************/
+/*description*/
+/**************************/
+.dev-container {
+    height: 60vh;
+    display: flex;
+    justify-content: center; /* 수평 중앙 정렬 */
+    align-items: center; /* 추가: 수직 중앙 정렬 */
+    max-width: 100%;
+    padding: 80px;
+    background-color: #ffffff;
+    box-sizing: border-box; /* 추가: padding이 높이에 포함되도록 설정 */
+}
+
+
+.logo-content {
+    flex: 0 0 240px;
+    margin-right: 40px;
+}
+
+.logo-content img {
+    width: 100%;
+    display: block;
+}
+
+.text-box {
+    margin: 0;
+    font-size: 1.2rem;
+    line-height: 1.6;
+    color: #333;
+}
+
+
+.logo-content, .text-box {
+    opacity: 0;
+    transition: opacity 1s ease-out, transform 1s ease-out;
+}
+
+.logo-content {
+    transform: translateX(-30px); /* 왼쪽으로 30px 이동한 상태 */
+}
+
+.text-box {
+    transform: translateX(30px); /* 오른쪽으로 30px 이동한 상태 */
+}
+
+
+.dev-container.is-visible .logo-content,
+.dev-container.is-visible .text-box {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+
+/**************************/
+/*brandGrid*/
+/**************************/
+.brand-grid-section {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.grid-row {
+    display: flex;
+}
+
+.top-row {
+    flex: 2;
+}
+
+.bottom-row {
+    flex: 1;
+}
+
+.grid-box {
+    flex: 1;
+    display: flex;
+    padding: 30px;
+
+    box-sizing: border-box;
+    border-right: 1px solid #333;
+    border-bottom: 1px solid #333;
+    overflow: hidden;
+}
+
+.grid-row .grid-box:last-child {
+    border-right: none;
+}
+
+.grid-box .grid-content {
+    width: 100%;
+    text-align: left;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.grid-box .grid-content .image-wrapper {
+    flex: 1; /* 텍스트를 제외한 모든 남는 공간을 차지 */
+    display: flex;
+    justify-content: center; /* 이미지를 수평 중앙 정렬 */
+    align-items: center; /* 이미지를 수직 중앙 정렬 */
+    overflow: hidden; /* 이미지가 넘치는 것을 방지 */
+}
+
+.logo-part {
+    background-color: #304FFE;
+}
+
+.font-part {
+    background-color: #2962FF;
+}
+
+.color-part, .icon-part, .mokup-part {
+    background-color: #fff;
+}
+
+.logo-part p, .font-part p {
+    color: #fff;
+}
+
+.color-part p, .icon-part p, .mokup-part {
+    color: #111;
+}
+
+.grid-box .grid-content img {
+    max-width: 100%;
+    height: auto;
+
+}
+
+.grid-box .grid-content p {
+    margin: auto 0 0;
+    padding-top: 20px;
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+
+/* 1. 이미지 교체 효과 준비 */
+.top-row .image-wrapper {
+    position: relative; /* 자식 이미지 위치의 기준점 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 이미지 기본 스타일 및 transition 설정 */
+.top-row .image-wrapper img {
+    position: absolute;
+    max-width: 100%;
+    height: auto;
+
+    transition: opacity 0.4s ease-in-out;
+}
+
+.top-row .img-hover {
+    opacity: 0; /* 평소에는 투명하게 */
+}
+
+/* 박스에 마우스 올리면 이미지 교체 */
+.top-row .grid-box:hover .img-hover {
+    opacity: 1;
+}
+
+.top-row .grid-box:hover .img-default {
+    opacity: 0;
+}
+
+
+/* 2. 배경색 변경 효과 준비 */
+.logo-part, .font-part {
+    transition: background-color 0.4s ease-in-out;
+}
+
+.color-part, .icon-part, .mokup-part {
+    transition: background-color 0.4s ease-in-out;
+}
+
+/* 박스에 마우스 올리면 배경색 어둡게 변경 */
+.logo-part:hover {
+    background-color: #1c2a4f;
+}
+
+.font-part:hover {
+    background-color: #1A237E;
+}
+
+.color-part:hover, .icon-part:hover, .mokup-part:hover {
+    background-color: #cccccc;
+}
+
+
+/*************************/
+/*BrandTitle*/
+/*************************/
+.brand-title-section {
+    background: linear-gradient(to bottom,
+    #fff 0%,
+    #fff 45%,
+    #f2f2f2 45%,
+    #f2f2f2 100%);
+
+    width: 100%;
+    height: 100vh;
+    padding: 0 5%;
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+
+.title-content {
+    height: 45%;
+    width: 100%;
+    max-width: 1200px;
+
+    display: flex;
+    text-align: left;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.title-content h2 {
+    font-size: 2.3rem;
+    font-weight: 700;
+    margin: 0 0 20px 0;
+
+}
+
+.title-content p {
+    font-size: 1.3rem;
+    line-height: 1.5;
+    max-width: 1200px;
+}
+
+.title-description {
+    height: 55%;
+    width: 100%;
+    max-width: 1200px;
+    text-align: center;
+
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px
+}
+
+.title-description img {
+    max-width: 1000px;
+    width: 100%;
+    height: auto;
+}
+
+
+.description-text-wrapper {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1000px;
+}
+
+.text-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 42%;
+}
+
+.text-item img {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+}
+
+.text-item h4 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin: 0;
+    color: #333333;
+    margin-top: 20px;
+}
+
+.text-item p {
+    font-size: 0.9rem;
+    margin: 0;
+    color: #555;
+    margin-top: 12px;
+}
+
+.animate-item {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+/* 2. 화면에 나타났을 때 적용될 .visible 클래스 */
+.animate-item.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.animate-item:nth-child(2) {
+    transition-delay: 0.2s;
+}
+
+.animate-item:nth-child(3) {
+    transition-delay: 0.4s;
+}
+
+.animate-item:nth-child(4) {
+    transition-delay: 0.6s;
+}
+
+
+/************************** NamingSection **************************/
+.final-section-layout {
+    font-family: 'Aggravo', sans-serif;
+    background-color: #111;
+    color: #fff;
+    line-height: 1.6;
+}
+
+/* 제목 및 단락 공통 스타일 */
+.final-section-layout h1,
+.final-section-layout h2,
+.final-section-layout h3,
+.final-section-layout h4 {
+    font-weight: 600;
+    color: #fff;
+}
+
+.final-section-layout p {
+    color: #a0a0a0;
+}
+
+/* ========== 1. Naming 영역 스타일 ========== */
+.section-container {
+    width: 100%;
+    margin: 0 auto;
+    padding: 6rem 2rem;
+    text-align: center;
+}
+
+.naming-intro h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: #fff;
+}
+
+.naming-intro h2 {
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #fff;
+}
+
+.naming-intro h3 {
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: #fff;
+}
+
+.card-grid {
+    display: grid;
+    max-width: 1200px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    margin-top: 4rem;
+
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.card {
+    position: relative;
+    border-radius: 16px;
+    padding: 1.5rem;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    text-align: left;
+
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.card.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.card.blue {
+    background-color: #2952E3;
+}
+
+.card.orange {
+    background-color: #E87121;
+}
+
+.card img {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    width: 40%;
+    height: 40%;
+    object-fit: contain;
+    opacity: 0.3;
+    z-index: 1;
+}
+
+.card:nth-child(1) {
+    transition-delay: 0.1s;
+}
+
+.card:nth-child(2) {
+    transition-delay: 0.2s;
+}
+
+.card:nth-child(3) {
+    transition-delay: 0.3s;
+}
+
+.card:nth-child(4) {
+    transition-delay: 0.4s;
+}
+
+.card:nth-child(5) {
+    transition-delay: 0.2s;
+}
+
+/* 두 번째 줄 */
+.card:nth-child(6) {
+    transition-delay: 0.3s;
+}
+
+.card:nth-child(7) {
+    transition-delay: 0.4s;
+}
+
+.card:nth-child(8) {
+    transition-delay: 0.5s;
+}
+
+.naming-card-content {
+    position: relative;
+    z-index: 2;
+}
+
+.naming-card-content h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.4rem;
+    color: #fff
+}
+
+.naming-card-content p {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+
+.voice-background-wrap {
+    position: relative;
+    width: 100%;
+    padding: 8rem 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    overflow: hidden;
+
+    min-height: 100vh;
+    margin-top: 3%;
+}
+
+.voice-background-wrap::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.voice-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+.voice-img img {
+    width: 100%;
+    object-fit: cover;
+}
+
+
+.voice-intro, .voice-content {
+    position: relative;
+    z-index: 1;
+    max-width: 1200px;
+    width: 100%;
+}
+
+.voice-intro {
+    margin-bottom: 4rem;
+    font-weight: 500;
+    font-size: 172px;
+}
+
+.voice-intro h1 {
+    font-size: 72px;
+    font-weight: 500;
+    color: #fff;
+}
+
+.voice-content {
+    display: flex;
+    flex-direction: column;
+    gap: 5rem;
+}
+
+.voice-text h4 {
+    font-size: 36px;
+    color: #fff;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+}
+
+.voice-text p {
+    font-size: 28px;
+    color: #fff;
+    font-weight: 400;
+}
+
+.voice-background-wrap::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 150px;
+    background: linear-gradient(to top, #111, transparent);
+    z-index: 1;
+}
+
+.voice-text {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.voice-text.animate {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.voice-text:nth-child(2) {
+    transition-delay: 0.2s;
+}
+
+.voice-text:nth-child(3) {
+    transition-delay: 0.4s;
+}
+
+.icon-container {
+    padding-top: 4rem;
+}
+
+.icon-content {
+    display: flex;
+    justify-content: center;
+}
+
+.icon-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8rem;
+    max-width: 700px;
+}
+
+.icon-grid img {
+    width: 100%;
+    height: auto;
+}
+
+
+/*************************/
+/*Manifesto Section*/
+/*************************/
+.manifesto-section {
+    margin: 0;
+    padding: 0 0 100px;
+
+    width: 100%;
+    background-color: #111;
+    color: #fff;
+}
+
+.manifesto-container {
+    width: 100%;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+
+.manifesto-intro {
+    background-color: #fff;
+    color: #111;
+    padding: 60px 0;
+}
+
+
+.manifesto-intro h2,
+.manifesto-intro p {
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+
+.manifesto-intro h2 {
+    font-size: 42px;
+    font-weight: 800;
+    margin-bottom: 16px;
+    margin-left: 10%;
+}
+
+
+.manifesto-intro p {
+    font-size: 16px;
+    color: #555;
+    width: 100%;
+
+    margin-left: 10%;
+}
+
+
+.manifesto-img img {
+    width: 100%;
+    margin: auto;
+    display: block;
+}
+
+.manifesto-description {
+    max-width: 800px;
+    margin-top: 7%;
+    padding-left: 15%;
+    box-sizing: border-box;
+}
+
+.manifesto-description p {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.8;
+    margin-bottom: 24px;
+}
+
+/**************************************************/
+/*SDGs Section*/
+.sdgs-section {
+    background-color: #fff;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.sdgs-container {
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+.sdgs-description {
+    padding: 100px 0;
+    color: #111;
+}
+
+.sdgs-description h1,
+.sdgs-description p {
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+.sdgs-description p {
+    font-size: 1.2rem;
+    line-height: 1.6;
+}
+
+
+.sdgs-images {
+    display: grid;
+    max-width: 1200px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    margin-top: 4rem;
+
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+/**************************************************/
+/*BSS Section*/
+.bss-section {
+    width: 100%;
+    color: #111;
+    background-color: #fff;
+    padding: 40px 20px;
+}
+
+.bss-container {
+    border-top: 1px solid rgba(0, 0, 0, 0.2);
+    padding: 0;
+}
+
+.bss-intro {
+    margin-top: 5%;
+    margin-left: 15%;
+    margin-bottom: 60px;
+}
+
+.bss-intro h1 {
+    font-size: 2rem;
+    line-height: 3;
+}
+
+.bss-intro p {
+    font-size: 1.2rem;
+}
+
+
+.bss-content {
+    margin: 0 0 0 20%;
+}
+
+.bss-content h2 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 10%;
+    margin-bottom: 16px;
+}
+
+.bss-content img {
+    max-width: 800px;
+    margin-top: 20px;
+    margin-left: 20px;
+    justify-content: center;
+}
+
+.bss-symbol-images {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    margin-top: 0;
+}
+
+.bss-sub {
+    margin-bottom: 60px;
+}
+
+
+/**************************************************/
+/*Font Section*/
+.font-section {
+    width: 100%;
+    color: #111;
+    background-color: #fff;
+    padding: 40px 20px;
+}
+
+.font-container {
+    border-top: 1px solid rgba(0, 0, 0, 0.2);
+    padding: 0;
+}
+
+.font-intro {
+    margin-top: 5%;
+    margin-left: 15%;
+    margin-bottom: 60px;
+}
+
+.font-intro h1 {
+    font-size: 2rem;
+    line-height: 3;
+}
+
+.font-intro p {
+    font-size: 1.2rem;
+}
+
+.font-content {
+    margin: 0 0 0 20%;
+}
+
+.font-content h2 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 10%;
+    margin-bottom: 16px;
+}
+
+.font-content img {
+    max-width: 800px;
+    margin-top: 20px;
+    margin-left: 20px;
+    justify-content: center;
+}
+
+
+/**************************************************/
+/*Color Section*/
+.color-section {
+    width: 100%;
+    padding: 40px 20px;
+    color: #111;
+    background-color: #fff;
+}
+
+.color-container {
+    padding: 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.oneCard,
+.color-card,
+.color-scale img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.color-intro {
+    margin: 5% 0 100px 15%;
+}
+
+.color-content h3,
+.color-scale h3 {
+    font-weight: bold;
+    margin-bottom: 24px;
+}
+
+.color-content h3 {
+    font-size: 24px;
+    margin-left: 20%;
+}
+
+.oneCard {
+    margin-top: 20px;
+}
+
+.color-card {
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+    height: 400px;
+    padding: 40px;
+    box-sizing: border-box;
+    color: #fff;
+}
+
+.color-info h3 {
+    font-size: 80px;
+    font-weight: 800;
+    margin: 0;
+}
+
+.color-info p {
+    font-size: 50px;
+    font-weight: 600;
+    margin-top: 16px;
+    opacity: 0.9;
+}
+
+
+.blue-card {
+    background-color: #2A5EFF;
+}
+
+.orange-card {
+    background-color: #FF6E19;
+}
+
+.color-icon {
+    position: absolute;
+    bottom: 40px;
+    right: 40px;
+    width: 120px;
+    height: auto;
+}
+
+.color-scale {
+    margin-top: 5%;
+}
+
+.color-scale img {
+    max-width: 800px;
+    margin-bottom: 20px;
+}
+
+
+/**************************************************/
+/*Icongraphy*/
+.iconsystem-section {
+    width: 100%;
+    padding: 40px 20px;
+    color: #111;
+    background-color: #fff;
+
+    border-top: 1px solid #e0e0e0;
+}
+
+.icongraphy-container {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+
+.icongraphy-intro {
+    margin-bottom: 80px;
+}
+
+
+.icongraphy-intro h1 {
+    font-size: 32px;
+    font-weight: 600;
+    margin: 0 0 16px 0;
+}
+
+.icongraphy-intro p {
+    font-size: 16px;
+    color: #555;
+    line-height: 1.6;
+}
+
+.icongraphy-content h2 {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 30px;
+    margin-left: 5%;
+}
+
+.icongraphy-content img {
+    display: block;
+    max-width: 800px;
+    margin: 0 auto 20px;
+}
+
+
+/**************************************************/
+/*Mokup*/
+.mokup-section{
+    width: 100%;
+    padding: 40px 20px;
+    color: #111;
+    background-color: #fff;
+
+    border-top: 1px solid #e0e0e0;
+}
+
+
+.mokup-container {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+
+.mokup-intro {
+    margin-bottom: 60px;
+}
+
+.mokup-intro h1 {
+    font-size: 32px;
+    font-weight: 600;
+    margin: 0 0 16px 0;
+}
+
+.mokup-intro p {
+    font-size: 16px;
+    color: #555;
+    line-height: 1.6;
+}
+
+.mokup-content h2 {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 30px;
+    margin-left: 5%;
+}
+
+
+.mokup-content img {
+    display: block;
+    max-width: 800px;
+    margin: 0 auto;
+}

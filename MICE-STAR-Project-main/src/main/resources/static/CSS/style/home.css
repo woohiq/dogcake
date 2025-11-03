@@ -1,0 +1,790 @@
+@import url('./animation.css');
+@import url('./layout.css');
+@import url('./base.css');
+@import url('../common/header.css');
+@import url('../common/footer.css');
+
+body, h1, h2, h3, h4, h5, h6,
+button, input,
+select {
+    font-family: 'Pretendard', sans-serif;
+}
+
+
+/*첫번째 세션*/
+.intro_bg {
+    background: linear-gradient(to bottom, #1E88E5 70%, #ffffff 70%);
+
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    color: white;
+}
+
+
+.main-content-wrapper {
+    padding-top: 80px; /* navbar 높이만큼 공간 확보 */
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.hero-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2% 40px 0;
+}
+
+.hero-img img {
+    width: 700px;
+    height: auto;
+}
+
+.hero-logo img {
+    max-width: 200px;
+    width: 100%;
+    height: auto;
+}
+
+
+/* --- 하단 메인 로고 --- */
+.bottom-logo-container {
+    position: relative;
+    padding-bottom: 2%;
+}
+
+.main-logo {
+    width: 100%;
+    max-width: 80%;
+    margin: 0 auto;
+    padding: 25px 30px;
+}
+
+.main-logo img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/******************************/
+/*2 세션*/
+/******************************/
+.dark-section {
+    position: relative;
+    overflow: hidden;
+
+    height: 100vh;
+    background-color: #111111;
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.dark-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background-image: url('/images/home/overlay1.png'),
+    url('/images/home/overlay2.png'),
+    url('/images/home/overlay6.png'),
+    url('/images/home/overlay5.png'),
+    url('/images/home/overlay4.png'),
+    url('/images/home/overlay3.png');
+
+    background-size: 800px, 400px, 350px, 800px, 300px, 500px;
+
+    background-position: 1% 10%, 1% 30%, 1% 75%, 95% 95%, 98% 75%, 98% 50%;
+    background-repeat: no-repeat;
+    opacity: 0.05;
+}
+
+.dark-section-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 50px;
+}
+
+
+.dark_brand-logo {
+    width: 200px;
+    height: auto;
+}
+
+
+.dark_brand-description {
+    margin-top: 60px;
+    font-weight: 100;
+    font-size: 1.2rem;
+    line-height: 1.8;
+    color: #cccccc;
+}
+
+/******************************/
+/*3 세션*/
+/******************************/
+.only_text-section {
+    height: 100vh;
+    width: 100%;
+
+    background-color: #000000;
+    display: flex;
+    justify-content: center; /*가로 중앙*/
+    align-items: center; /*세로 중앙 */
+    color: #ffffff;
+}
+
+.text-description {
+    font-size: 2.5rem;
+    font-weight: 500;
+}
+
+/******************************/
+/*4 세션*/
+/******************************/
+.vision_img-section {
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    background-color: #000000;
+    overflow: hidden;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+/* 배경 이미지 설정 */
+.vision_img-content img {
+    position: absolute;
+    width: 75%;
+    height: 75%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    object-fit: cover;
+
+    opacity: 0.7;
+    z-index: 1;
+
+    border-radius: 30px;
+}
+
+/* 텍스트 스타일 설정 */
+.vision-description {
+    position: absolute;
+    z-index: 2;
+
+    color: #ffffff;
+    font-size: 1.0rem;
+    line-height: 1.8;
+    font-weight: 500;
+
+    left: 15%;
+    bottom: 17%;
+
+    max-width: 40%;
+    text-align: left;
+}
+
+/******************************/
+/*Mission Section*/
+/******************************/
+.mission_img-section {
+    position: relative;
+    height: 100vh;
+    width: 100%;
+
+    overflow: hidden;
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.mission_img-section img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+    z-index: 1;
+}
+
+.mission-description {
+    position: relative;
+    z-index: 2;
+
+    max-width: 900px;
+    padding: 20px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    color: #ffffff;
+
+    opacity: 0;
+}
+
+.fade-in {
+    animation: fade-in-up 1s ease-out forwards;
+}
+
+.mission-description .line-1 {
+    font-size: 1.4rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+}
+
+.mission-description .line-2 {
+    font-size: 1.8rem;
+}
+
+.mission-description .line-3 {
+    font-size: 2.0rem;
+    font-weight: 400;
+}
+
+
+/******************************/
+/*6 세션*/
+/******************************/
+.core-section {
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+}
+
+.core-section img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+}
+
+/* 텍스트 전체를 감싸는 단락 스타일 */
+.core-description {
+    position: absolute;
+    z-index: 2;
+    top: 12%;
+    left: 15%;
+
+    color: #ffffff;
+    font-size: 1.5rem;
+    line-height: 1.5;
+}
+
+/* "MICE STAR는" 텍스트 스타일 */
+.core-description .line-1 {
+    display: block;
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+/* "#가능성" 박스 스타일 */
+.core-description .line-2 {
+    display: inline-block;
+    border: 1px solid #ffffff;
+
+    border-radius: 10px;
+    margin: 0 8px 0 0;
+    font-size: 3rem;
+    vertical-align: middle;
+
+    padding: 1px;
+}
+
+.core-description .line-3 {
+    font-size: 3rem;
+    font-weight: 400;
+    vertical-align: middle;
+}
+
+.card-content {
+    position: absolute;
+    bottom: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    gap: 70px;
+    z-index: 2;
+}
+
+/* 개별 카드 스타일 수정 */
+.info-card {
+    position: relative;
+    width: 25%;
+    height: 400px;
+    border-radius: 16px;
+    overflow: hidden;
+    color: #ffffff;
+
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.info-card img {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+}
+
+.info-card:hover {
+    /* 카드를 위로 15px 이동시키고 3% 확대 */
+    transform: translateY(-15px) scale(1.03);
+
+    /* 빛나는 효과를 위한 그림자 추가 */
+    box-shadow: 0 20px 40px rgba(255, 255, 255, 0.2);
+}
+
+.card-text-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    padding: 25px;
+    box-sizing: border-box;
+
+    /* flex를 이용해 내부 콘텐츠를 하단에 정렬합니다. */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.info-card h3 {
+    font-size: 1.5rem;
+    line-height: 1.4;
+    margin: 0 0 15px 0;
+}
+
+/* 카드 내용 스타일 */
+.info-card p {
+    font-size: 1rem;
+    line-height: 1.6;
+    opacity: 0.9;
+    margin: 0; /* 기본 마진 초기화 */
+
+    min-height: 4.8rem;
+}
+
+
+/* 애니메이션을 적용할 요소의 초기 상태 (투명하게 숨김) */
+.animate-on-scroll {
+    opacity: 0;
+}
+
+/* JavaScript에 의해 'start-animation' 클래스가 추가되면 애니메이션 실행 */
+.start-animation {
+    animation: core_fade_in 0.8s ease-out forwards;
+}
+
+/* 헤드라인 텍스트 애니메이션 */
+.core-description.start-animation {
+    animation-delay: 0.2s;
+}
+
+/* 카드 애니메이션 (0.2초 간격으로 순차적 실행) */
+.card-content .info-card:nth-child(1).start-animation {
+    animation-delay: 0.4s;
+}
+
+.card-content .info-card:nth-child(2).start-animation {
+    animation-delay: 0.6s;
+}
+
+.card-content .info-card:nth-child(3).start-animation {
+    animation-delay: 0.8s;
+}
+
+/******************************/
+/*7 세션*/
+/******************************/
+.tag-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+    width: 100%;
+    background-color: #111;
+    overflow: hidden; /* 중요: 화면 밖으로 나가는 태그를 숨깁니다. */
+}
+
+/* 태그들을 감싸는 섹션 */
+.tag-section {
+    max-width: 100%;
+}
+
+/* 개별 태그 줄 */
+.tag-row {
+    display: flex;
+    margin: 10px 0;
+}
+
+/* 태그 그룹 */
+.tag-group {
+    display: flex;
+    flex-shrink: 0;
+    /* 애니메이션 설정은 각 줄 클래스에서 지정 */
+}
+
+/* 개별 태그 스타일 */
+.tag {
+    padding: 10px 20px;
+    margin: 0 10px;
+    border-radius: 25px;
+    background-color: #f0f0f0;
+    color: #333;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.tag-blue {
+    background-color: #007bff;
+    color: white;
+}
+
+.tag-orange {
+    background-color: #fd7e14;
+    color: white;
+}
+
+
+/* 3. 각 줄에 다른 방향과 속도 적용 */
+.row-1 .tag-group {
+    animation: marquee-left 30s linear infinite;
+}
+
+.row-2 .tag-group {
+    animation: marquee-right 40s linear infinite; /* 다른 방향, 다른 속도 */
+}
+
+.row-3 .tag-group {
+    animation: marquee-left 35s linear infinite; /* 같은 방향, 다른 속도 */
+}
+
+
+/******************************/
+/*Live 세션*/
+/******************************/
+.live-section {
+    background-color: #111;
+    min-height: 100vh;
+    padding: 60px 20px;
+    display: flex;
+
+    flex-direction: column;
+    align-items: center;
+
+    gap: 30px;
+}
+
+
+/* 텍스트 콘텐츠 스타일 */
+.text-content {
+    position: relative;
+    top: 10%;
+    right: -7%;
+
+    color: #ffffff;
+    font-size: 1.3rem;
+    line-height: 1.6;
+    text-align: right;
+
+    z-index: 2;
+}
+
+
+/* 영상 컨테이너 스타일 */
+.live-content {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+    max-width: 700px;
+    height: auto;
+    margin: 30px auto;
+    /*aspect-ratio: 16 / 10;*/
+    /*border-radius: 20px;*/
+    overflow: hidden;
+
+    background-color: #000;
+}
+
+.live-content img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    display: block;
+}
+
+
+/******************************/
+/*9 Town card 세션*/
+/******************************/
+.town-section {
+    background-color: #111111;
+    padding: 80px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 50px;
+    overflow-x: hidden;
+}
+
+.town_title-content {
+    text-align: center;
+}
+
+.town_description {
+    color: #ffffff;
+    font-size: 1.8rem;
+    font-weight: 700;
+    line-height: 1.5;
+    margin-top: 70px;
+}
+
+.town_card-content {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+/*애니메이션 효과*/
+.card-animation {
+    background-color: #2a65f0;
+    width: 220px;
+    min-height: 300px;
+    padding: 30px;
+    border-radius: 20px;
+    position: relative;
+    z-index: 1;
+
+    opacity: 0;
+    transform: translateY(40px);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.card_text-wrapper {
+    text-align: center;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* 카드 내부 텍스트 및 버튼 스타일 */
+.card_text-wrapper p {
+    color: #ffffff;
+    font-size: 1.1rem;
+    font-weight: 700;
+    line-height: 1.6;
+    margin: 0;
+}
+
+
+.card_button {
+    background-color: #ffffff;
+    color: #2a65f0;
+    text-decoration: none;
+    font-weight: 700;
+    text-align: center;
+    padding: 12px 0;
+    border-radius: 10px;
+    width: 100%;
+
+    box-sizing: border-box;
+    transition: background-color 0.3s ease;
+
+    flex-shrink: 0;
+}
+
+
+.image-card {
+    background-size: cover;
+    background-position: center;
+
+    /*내부 컨텐츠*/
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/*card 이미지 경로*/
+.image-card.bg-1 {
+    background-image: url('/images/home/town/home_lastpic1_background.png');
+}
+
+.image-card.bg-2 {
+    background-image: url('/images/home/town/home_lastpic2_background.png');
+}
+
+.image-card.bg-3 {
+    background-image: url('/images/home/town/home_lastpic3_background.png');
+}
+
+.image-card.bg-4 {
+    background-image: url('/images/home/town/home_lastpic4_background.png');
+}
+
+.image-card.bg-5 {
+    background-image: url('/images/home/town/home_lastpic5_background.png');
+}
+
+.image-card .card_text-wrapper p {
+    color: white;
+}
+
+.card-animation.visible {
+    animation: town_slideUp 0.7s ease-out forwards;
+}
+
+.card-animation.visible:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.card-animation.visible:nth-child(2) {
+    animation-delay: 0.3s;
+}
+
+.card-animation.visible:nth-child(3) {
+    animation-delay: 0.5s;
+}
+
+.card-animation.visible:nth-child(4) {
+    animation-delay: 0.7s;
+}
+
+.card-animation.visible:nth-child(5) {
+    animation-delay: 0.9s;
+}
+
+/******************************/
+/*10 세션*/
+/******************************/
+.end-section {
+    background-color: #ffffff;
+}
+
+/* 상단 검은색 배경 섹션 */
+.background-section {
+    background-color: #111111;
+    height: 20vh; /* SVG 위의 검은 영역 높이 */
+}
+
+/* SVG 곡선을 스타일링합니다 */
+.curve-divider svg {
+    display: block;
+    width: 100%;
+    height: 200px;
+}
+
+.curve-divider .shape-fill {
+    fill: #111111;
+}
+
+/* 흰색 섹션의 상단 패딩을 조정하여 내용 위치를 맞춥니다. */
+.white-section {
+    padding: 20px 20px 10px 20px;
+    background-color: #ffffff;
+}
+
+.img-content {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    margin-bottom: 100px; /* 로고와 아래 텍스트 사이의 간격 */
+}
+
+/* 각 로고 줄의 공통 스타일 */
+.img-row {
+    display: grid;
+    gap: 15px; /* 간격을 조금 넓히는 것을 추천 */
+    justify-content: center;
+    margin-bottom: 30px; /* 줄과 줄 사이의 간격 */
+    align-items: center; /* 로고들을 세로 중앙에 정렬 */
+}
+
+/* 첫 번째 줄은 4개의 열로 지정 */
+.img-row:nth-of-type(1) {
+    grid-template-columns: repeat(4, 1fr);
+}
+
+/* 두 번째 줄은 5개의 열로 지정 */
+.img-row:nth-of-type(2) {
+    grid-template-columns: repeat(5, 1fr);
+}
+
+
+/* 로고 이미지 스타일 (정렬 및 크기 문제 수정) */
+.img-row img {
+    max-width: 150px;
+    max-height: 50px;
+    justify-self: center; /* 셀 안에서 수평 중앙 정렬 */
+    object-fit: contain;
+    height: auto;
+}
+
+/* 하단 텍스트 스타일 (가독성 개선) */
+.end-description {
+    text-align: center;
+    color: #111111;
+}
+
+.end-description p {
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.6;
+}
+
+
+/* --- 반응형 레이아웃 --- */
+@media (max-width: 768px) {
+    .img-row:nth-of-type(1),
+    .img-row:nth-of-type(2) {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .img-row:nth-of-type(1),
+    .img-row:nth-of-type(2) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}

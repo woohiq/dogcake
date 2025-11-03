@@ -1,0 +1,78 @@
+@import url('../common/header.css');
+@import url('../common/footer.css');
+@import url('./animation.css');
+@import url('./base.css');
+@import url('./layout.css');
+
+body, h1, h2, h3, h4, h5, h6,
+button, input,
+select {
+    font-family: 'Pretendard', sans-serif;
+}
+
+.book-section{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: #111;
+    padding: 5rem 2rem;
+    overflow: hidden;
+}
+
+
+.public-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto; /*컨테이너 자체 중앙 정렬*/
+}
+
+
+.book-link{
+    display: inline-block;
+    text-decoration: none;
+    position: relative;
+}
+
+
+.blue-book,
+.orange-book{
+    width: 130px;
+    height: auto;
+    transition: transform 0.3s ease, z-index 0s 0s;
+}
+
+
+.blue-book{
+    transform: rotate(-7deg); /*오른쪽으로 8도 기울이기*/
+    z-index:10;
+    margin-right: 5rem;
+}
+
+.orange-book{
+    transform: rotate(8deg);
+    z-index:9
+}
+
+.publish-logo-left,
+.publish-logo-right{
+    width: 350px;
+    height: auto;
+}
+
+
+.publish-logo-left{
+    margin-right: 4rem;
+}
+
+.publish-logo-right{
+    margin-left: 4rem;
+}
+
+.book-link:hover .blue-book,
+.book-link:hover .orange-book{
+    transform: rotate(0deg) scale(1.05);
+    z-index:20;
+}

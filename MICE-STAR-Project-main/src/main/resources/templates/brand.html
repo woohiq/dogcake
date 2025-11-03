@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>MICE STAR</title>
+    <link rel="stylesheet" href="/CSS/style/brand.css">
+</head>
+
+<body>
+<div class="web">
+
+    <div th:replace="~{fragments/header :: headerFragment}"></div>
+
+    <div th:replace="~{fragments/brand_sections/box::boxSection}"></div>
+    <div th:replace="~{fragments/brand_sections/Mice_dev::devSection}"></div>
+    <div th:replace="~{fragments/brand_sections/brandgrid::brandGridSection}"></div>
+    <div th:replace="~{fragments/brand_sections/brandTitle::titleSection}"></div>
+    <div th:replace="~{fragments/brand_sections/naming::NamingSection}"></div>
+    <div th:replace="~{fragments/brand_sections/manifesto::manifestoSection}"></div>
+    <div th:replace="~{fragments/brand_sections/SDGS::SdgsSection}"></div>
+    <div th:replace="~{fragments/brand_sections/BSS::BSSSection}"></div>
+    <div th:replace="~{fragments/brand_sections/font::FontSection}"></div>
+    <div th:replace="~{fragments/brand_sections/color::ColorSection}"></div>
+    <div th:replace="~{fragments/brand_sections/iconsystem::IconSystem}"></div>
+    <div th:replace="~{fragments/brand_sections/mokup::MokupSection}"></div>
+
+
+    <script th:src="@{/js/brand_js/logo_dev.js}"></script>
+    <script th:src="@{/js/brand_js/brand_title.js}"></script>
+    <script th:src="@{/js/brand_js/naming.js}"></script>
+    <script th:src="@{/js/brand_js/voice.js}"></script>
+
+
+    <footer th:replace="~{fragments/footer :: footerFragment}"></footer>
+</div>
+
+</body>
+</html>
