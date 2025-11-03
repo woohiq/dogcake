@@ -49,6 +49,16 @@ async def serve_brand():
 async def serve_project():
     return FileResponse("MICE-STAR-Project-main/pages/project.html")
 
+# MICE-STAR 프로젝트 White Map
+@app.get("/project/map/white")
+async def serve_white_map():
+    return FileResponse("MICE-STAR-Project-main/pages/whiteMap.html")
+
+# MICE-STAR 프로젝트 Black Map
+@app.get("/project/map/black")
+async def serve_black_map():
+    return FileResponse("MICE-STAR-Project-main/pages/blackMap.html")
+
 # MICE-STAR 출판물 페이지
 @app.get("/publications")
 async def serve_publications():
@@ -63,6 +73,11 @@ async def serve_dadak():
 @app.get("/archive")
 async def serve_archive():
     return FileResponse("MICE-STAR-Project-main/pages/archive.html")
+
+# MICE-STAR 아카이브 상세 페이지
+@app.get("/archive/Sub/{id}")
+async def serve_archive_detail(id: int):
+    return FileResponse("MICE-STAR-Project-main/pages/archiveDetail.html")
 
 
 # CORS 설정

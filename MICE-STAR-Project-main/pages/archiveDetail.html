@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Archive Detail - MICE STAR</title>
+    <link rel="stylesheet" href="/CSS/style/base.css">
+    <link rel="stylesheet" href="/CSS/style/archiveSub.css">
+    <link rel="stylesheet" href="/CSS/common/header.css">
+    <link rel="stylesheet" href="/CSS/common/footer.css">
+</head>
+<body>
+    <!-- 헤더 -->
+    <nav class="navbar">
+        <div class="navbar_content">
+            <div class="logo-small">
+                <a href="/bananaquiz">
+                    <img class="logo-default" src="/images/home/logo.png" alt="MICE STAR 홈으로 이동">
+                </a>
+            </div>
+            <ul class="menu">
+                <li><a href="/bananaquiz">홈</a></li>
+                <li><a href="/brand">브랜드</a></li>
+                <li><a href="/project">프로젝트</a></li>
+                <li><a href="/publications">출판물</a></li>
+                <li><a href="/dadak">다닥X행궁</a></li>
+                <li><a href="/archive">아카이브</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="archive-page-wrapper">
+        <button class="nav-btn prev-btn">
+            <img src="/images/archive/leftarrow.png" alt="왼쪽 화살표">
+        </button>
+
+        <div class="archive-frame-container" id="archiveFrameContainer">
+            <img id="currentArchiveImage" src="" alt="Archive Image">
+            <div id="imageCounter" class="image-counter">
+                <span id="currentImageNum">1</span> / <span id="totalImageNum">10</span>
+            </div>
+        </div>
+
+        <button class="nav-btn next-btn">
+            <img src="/images/archive/rightarrow.png" alt="오른쪽 화살표">
+        </button>
+
+        <button id="downloadButton">Download</button>
+    </div>
+
+    <!-- 푸터 -->
+    <footer class="site-footer">
+        <div class="footer-content">
+            <div class="footer-left">
+                <img src="/images/home/footerlogo.png" alt="MICE STAR Footer Logo">
+                <div class="footer-links">
+                    <a href="#"><b>개인정보처리방침</b></a>
+                    <span class="separator">|</span>
+                    <a href="#">이용약관</a>
+                </div>
+                <p class="footer-copyright">
+                    Copyright ⓒ MICE STAR All Right Reserved.
+                </p>
+            </div>
+            <div class="footer-right">
+                <p class="contact-title"><b>문의사항이 있으신가요?</b></p>
+                <a href="mailto:eunyo996@khu.ac.kr" class="contact-email"><b>eunyo996@khu.ac.kr</b></a>
+                <p class="contact-notice">이메일 접수 후 순차적으로 회신드립니다.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // URL에서 archiveId 추출
+        const pathParts = window.location.pathname.split('/');
+        const archiveId = parseInt(pathParts[pathParts.length - 1]);
+
+        // archiveId에 따른 설정
+        let totalImages;
+        let frameImageUrl;
+
+        switch(archiveId) {
+            case 0:
+                totalImages = 20;
+                frameImageUrl = "/images/archive/blueframe.png";
+                break;
+            case 2:
+                totalImages = 11;
+                frameImageUrl = "/images/archive/orangeframe.png";
+                break;
+            default:
+                totalImages = 10;
+                if (archiveId >= 1 && archiveId <= 8) {
+                    frameImageUrl = "/images/archive/orangeframe.png";
+                } else {
+                    frameImageUrl = "/images/archive/blueframe.png";
+                }
+                break;
+        }
+
+        // 프레임 이미지 설정
+        const frameContainer = document.getElementById('archiveFrameContainer');
+        frameContainer.style.backgroundImage = `url('${frameImageUrl}')`;
+        frameContainer.setAttribute('data-archive-id', archiveId);
+        frameContainer.setAttribute('data-total-images', totalImages);
+
+        // 총 이미지 수 표시
+        document.getElementById('totalImageNum').textContent = totalImages;
+    </script>
+    <script src="/js/archive_js/archiveDetail.js"></script>
+</body>
+</html>
+
