@@ -11,7 +11,7 @@ import google.generativeai as genai
 import os
 from dotenv import load_dotenv # local
 # load_dotenv()
-# app = FastAPI()
+app = FastAPI()
 # print("현재 DATABASE_URL:", os.getenv("DATABASE_URL"))
 
 # MICE-STAR 프로젝트의 정적 파일들을 먼저 마운트 (우선순위 높게)
