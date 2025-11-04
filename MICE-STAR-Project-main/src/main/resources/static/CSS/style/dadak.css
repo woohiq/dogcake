@@ -307,8 +307,8 @@ select{
 /* 팝업 본체 */
 .popup-content {
     position: relative;
-    width: 1300px;
-    height: 980px;
+    width: 1040px; 
+    height: 784px; 
     background-color: #F1C13A; /* 노란색 배경 */
     display: flex;
     justify-content: center;
@@ -349,9 +349,8 @@ select{
 }
 
 #popup-39 .popup-content {
-    width: 1300px;
-    height: 1896px;
-}
+    width: 1040px; 
+    height: 1517px; 
 
 /* 팝업 안의 이미지 두 개를 세로로 정렬 */
 #popup-39 .popup-body {

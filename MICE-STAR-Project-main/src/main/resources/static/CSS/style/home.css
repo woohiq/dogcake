@@ -765,6 +765,7 @@ select {
 .end-description {
     text-align: center;
     color: #111111;
+    margin-bottom: 100px;
 }
 
 .end-description p {
